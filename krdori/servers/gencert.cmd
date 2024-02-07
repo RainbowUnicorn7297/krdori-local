@@ -1,0 +1,1 @@
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout gc-session-zinny3.key -out gc-session-zinny3.crt -subj "/CN=gc-session-zinny3.kakaogames.com" -days 36500
