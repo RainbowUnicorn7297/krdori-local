@@ -1,0 +1,14 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UpdatedBandDeckRank {
+  uint32 band_id = 1;
+  string before_symbol = 2;
+  uint32 before_level = 3;
+  string after_symbol = 4;
+  uint32 after_level = 5;
+}
+
+message UpdatedBandDeckRankList {
+  repeated krdori.pb2.ce.UpdatedBandDeckRank entries = 1;
+}

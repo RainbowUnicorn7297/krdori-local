@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserStamp {
+  uint64 user_id = 1;
+  uint32 stamp_id = 2;
+  uint32 seq = 3;
+}
+
+message UserStampMap {
+  map<uint32, krdori.pb2.ce.UserStamp> entries = 1;
+}

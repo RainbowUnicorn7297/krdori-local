@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserGallery {
+  uint32 situation_id = 1;
+  string illust = 2;
+  uint32 seq = 3;
+}
+
+message UserGalleryList {
+  repeated krdori.pb2.ce.UserGallery entries = 1;
+}

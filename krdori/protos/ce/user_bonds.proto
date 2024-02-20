@@ -1,0 +1,17 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserBonds {
+  uint64 user_id = 1;
+  uint32 bonds_id = 2;
+  uint32 level = 3;
+  uint32 bonds = 4;
+}
+
+message UserBondsList {
+  repeated krdori.pb2.ce.UserBonds entries = 1;
+}
+
+message UserReleasedBondsIdList {
+  repeated uint32 entries = 1;
+}

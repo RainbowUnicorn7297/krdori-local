@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserPurchaseMenuLastVisit {
+  uint64 user_id = 1;
+  uint32 purchase_menu_id = 2;
+  uint64 update_at = 3;
+}
+
+message UserPurchaseMenuLastVisitMap {
+  map<uint32, krdori.pb2.ce.UserPurchaseMenuLastVisit> entries = 1;
+}

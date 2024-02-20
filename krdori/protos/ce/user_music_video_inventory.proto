@@ -1,0 +1,21 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMusicVideoInventory {
+  uint64 user_id = 1;
+  uint32 music_id = 2;
+  uint32 seq = 3;
+}
+
+message UserMusicVideoInventoryList {
+  repeated krdori.pb2.ce.UserMusicVideoInventory entries = 1;
+}
+
+message UserMusicVideoInventoryListMap {
+  map<uint32, krdori.pb2.ce.UserMusicVideoInventoryList> entries = 1;
+}
+
+message UserMusicVideoListMap {
+  krdori.pb2.ce.UserMusicVideoInventoryListMap user_music_video_inventory_list_map = 1;
+  // repeated krdori.pb2.ce.NewlyOpenedContent user_music_video_newly_opened_content_list = 2;
+}

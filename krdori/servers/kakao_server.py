@@ -61,7 +61,8 @@ def application(environ, start_response):
                         'static-web': 'http://patch-gs.bdk.kakaogames.com/live/static-web',
                         'url_setting_dialog_help': 'https://kakaogames.oqupie.com/portals/1697/articles/35835',
                         'kakaogameCommunityUrl': 'https://playgame.kakao.com/bangdream',
-                        'gameServerAddr': 'http://live.bdk.kakaogames.com:50051/api/',
+                        # 'gameServerAddr': 'http://live.bdk.kakaogames.com:50051/api/',
+                        'gameServerAddr': 'http://192.168.0.50:5000/api/',
                         'modTime': 1514876083602,
                         'daumCafeUrl': 'http://cafe.daum.net/bangdream',
                         'photonId': 'abb90c74-f36d-441b-bf5d-241315ea5f06',
@@ -227,6 +228,17 @@ def application(environ, start_response):
         headers.append(('resTime', str(int(time.time()*1000))))
     elif '/service/v3/util/country/get' in path_info:
         response = f'{{"country":"{_request_country}"}}'
+    elif 'v1/user/access_token_info' in path_info:
+        response = json.dumps(
+            {
+                'expiresInMillis': 86_400_000,
+                'id': 1000000000,
+                'expires_in': 86_400,
+                'app_id': 137316,
+                'appId': 137316
+            },
+            separators=(',', ':')
+        )
     elif '/session' in path_info:
         # print('\n'.join([str((f'{key}: {value}').encode('utf-8'))
         #                  for key, value in environ.items()]))

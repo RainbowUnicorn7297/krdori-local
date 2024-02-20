@@ -1,0 +1,18 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserBandRank {
+  uint64 user_id = 1;
+  uint32 band_id = 2;
+  uint32 band_rank = 3;
+  uint32 exp = 4;
+  uint32 add_exp = 5;
+  uint64 pooled_exp = 6;
+  uint64 total_exp = 7;
+  uint32 next_exp = 8;
+  // krdori.pb2.ce.PlayerResourceList band_rank_rewards = 101;
+}
+
+message UserBandRankMap {
+  map<uint32, krdori.pb2.ce.UserBandRank> entries = 1;
+}

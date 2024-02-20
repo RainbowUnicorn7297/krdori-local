@@ -1,0 +1,9 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserBadPenalty {
+  uint64 user_id = 1;
+  uint32 bad_count = 2;
+  uint64 bad_date = 3;
+  uint64 penalty_date = 4;
+}

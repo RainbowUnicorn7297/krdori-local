@@ -1,0 +1,22 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserEventMusicScore {
+  uint64 user_id = 1;
+  uint32 event_id = 2;
+  uint32 music_id = 3;
+  string music_difficulty = 4;
+  uint32 solo_high_score = 5;
+  uint32 multi_high_score = 6;
+  uint32 max_combo = 7;
+  string clear_status = 8;
+  string solo_score_rank = 9;
+}
+
+message UserEventMusicScoreList {
+  repeated krdori.pb2.ce.UserEventMusicScore entries = 1;
+}
+
+message UserEventMusicScoresMap {
+  map<uint32, krdori.pb2.ce.UserEventMusicScoreList> entries = 1;
+}

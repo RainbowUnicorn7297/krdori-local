@@ -1,0 +1,14 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserLimitedExchanges {
+  uint64 user_id = 1;
+  uint32 limited_exchanges_id = 2;
+  uint32 limited_exchanges_detail_id = 3;
+  uint32 remain = 4;
+  uint64 reset_at = 5;
+}
+
+message UserLimitedExchangesList {
+  repeated krdori.pb2.ce.UserLimitedExchanges entries = 1;
+}

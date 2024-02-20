@@ -257,12 +257,41 @@ async def process_request(path, request_headers) -> Response | None:
 
 
 async def handler(websocket):
+    prereq = re.search('prereq=(.*)', websocket.path).group(1)
+    prereq = base64.urlsafe_b64decode(prereq)
+    prereq = zlib.decompress(prereq)
+    prereq = json.loads(prereq)
+    requestUri = prereq[0]
+    header = json.dumps(
+        {
+            'publishTime': int(time.time()*1000),
+            'txNo': prereq[1]['txNo']
+        },
+        separators=(',', ':')
+    )
+    body = json.dumps(
+        {
+            'status': 200,
+            'desc': 'success',
+            'content': {
+                'player': {
+                    'playerId': '900000000000',
+                },
+                'zat': 'zat',
+                'zatExpiryTime': int(time.time()*1000) + 86_400_000,
+            }
+        },
+        separators=(',', ':')
+    )
+    await websocket.send(f'["{requestUri}",{header},{body}]')
     async for message in websocket:
-        # if websocket.response:
-        #     continue
-        # print(websocket.request.headers)
         print(message)
-        await websocket.send(message)
+        request = json.loads(message)
+        requestUri = request[0]
+        if requestUri == 'presence://v2/player/heartbeat':
+            await websocket.send(None)
+        else:
+            await websocket.send(message)
 
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
@@ -273,7 +302,7 @@ ssl_context.load_cert_chain(certfile, keyfile)
 
 async def main(port):
     # async with serve(handler, '', 8081, process_request=process_request):
-    async with serve(handler, '', port, ssl=ssl_context, process_request=process_request):
+    async with serve(handler, '', port, ssl=ssl_context):#, process_request=process_request):
         print(f'Serving WSS on port {port}...')
         await asyncio.Future()  # run forever
 

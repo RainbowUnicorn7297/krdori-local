@@ -1,0 +1,10 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserDailyLiveTotalRewardHistory {
+  uint64 user_id = 1;
+  uint32 daily_live_id = 2;
+  string status = 3;
+  uint32 daily_live_count = 4;
+  uint32 daily_live_clear_count = 5;
+}

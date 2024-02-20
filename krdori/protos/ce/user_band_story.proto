@@ -1,0 +1,14 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserBandStory {
+  uint64 user_id = 1;
+  uint32 band_story_id = 2;
+  uint32 band_id = 3;
+  string status = 4;
+  uint32 seq = 5;
+}
+
+message UserBandStoryList {
+  repeated krdori.pb2.ce.UserBandStory entries = 1;
+}

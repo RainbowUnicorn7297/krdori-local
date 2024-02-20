@@ -1,0 +1,10 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserGraphicalInformation {
+  uint32 graphical_id = 1;
+}
+
+message UserGraphicalInformationList {
+  repeated krdori.pb2.ce.UserGraphicalInformation entries = 1;
+}

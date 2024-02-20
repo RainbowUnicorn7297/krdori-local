@@ -1,0 +1,6 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserLiveBoostUseBonusLimitList {
+  // repeated krdori.pb2.ce.ResourceKey entries = 1;
+}

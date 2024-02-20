@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserEventItem {
+  uint64 user_id = 1;
+  uint32 event_item_id = 2;
+  uint32 quantity = 3;
+}
+
+message UserEventItemList {
+  repeated krdori.pb2.ce.UserEventItem entries = 1;
+}

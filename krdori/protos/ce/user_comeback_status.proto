@@ -1,0 +1,10 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserComebackStatus {
+  uint64 user_id = 1;
+  uint64 start_at = 2;
+  uint64 live_boost_bonus_end_at = 3;
+  uint64 comeback_gacha_end_at = 4;
+  uint32 comeback_gacha_id = 5;
+}

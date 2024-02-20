@@ -1,0 +1,11 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserFestivalTeam {
+  uint32 event_id = 1;
+  uint32 team_id = 2;
+}
+
+message UserFestivalTeamMap {
+  map<uint32, krdori.pb2.ce.UserFestivalTeam> entries = 1;
+}

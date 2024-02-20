@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserDecoEquipment {
+  uint32 user_id = 1;
+  uint32 deco_frame_id = 2;
+  uint32 deco_pins_id1 = 3;
+  uint32 deco_pins_id2 = 4;
+  uint32 deco_pins_id3 = 5;
+  uint32 deco_pins_id4 = 6;
+  uint32 deco_pins_id5 = 7;
+}

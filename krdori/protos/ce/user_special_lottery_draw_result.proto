@@ -1,0 +1,19 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserSpecialLotteryDrawResult {
+  uint64 user_id = 1;
+  uint32 special_lottery_id = 2;
+  uint32 seq = 3;
+  string special_lottery_result_type = 4;
+  string asset_name = 5;
+  uint32 character_id = 6;
+}
+
+message UserSpecialLotteryDrawResultList {
+  repeated krdori.pb2.ce.UserSpecialLotteryDrawResult entries = 1;
+}
+
+message UserSpecialLotteryDrawResultMap {
+  map<uint32, krdori.pb2.ce.UserSpecialLotteryDrawResultList> entries = 1;
+}

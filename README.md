@@ -5,4 +5,6 @@ Technical details can be found [here](README-technical.md).
 
 ## Required Python Packages
 - websockets
-- grpcio
+- grpcio-tools
+- pycryptodome
+- flask

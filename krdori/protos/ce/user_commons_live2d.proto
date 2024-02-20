@@ -1,0 +1,15 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserCommonsLive2d {
+  uint32 live2d_id = 1;
+  string live2d_category = 2;
+}
+
+message UserCommonsLive2dList {
+  repeated UserCommonsLive2d entries = 1;
+}
+
+message UserCommonsLive2dMap {
+  map<string, krdori.pb2.ce.UserCommonsLive2dList> entries = 1;
+}

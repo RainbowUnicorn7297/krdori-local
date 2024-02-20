@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserDecoFrameInventory {
+  uint32 user_id = 1;
+  uint32 deco_frame_id = 2;
+  uint32 level = 3;
+}
+
+message UserDecoFrameInventoryMap {
+  map<uint32, krdori.pb2.ce.UserDecoFrameInventory> entries = 1;
+}

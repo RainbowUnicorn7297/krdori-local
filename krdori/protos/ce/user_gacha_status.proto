@@ -1,0 +1,16 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserGachaStatus {
+  uint64 user_id = 1;
+  uint32 gacha_id = 2;
+  uint32 payment_method_id = 3;
+  bool can_spin = 4;
+  uint32 can_spin_limit = 5;
+  bool can_extra_get = 6;
+  uint32 spin_count = 7;
+}
+
+message UserGachaStatusMap {
+  map<uint32, krdori.pb2.ce.UserGachaStatus> entries = 1;
+}

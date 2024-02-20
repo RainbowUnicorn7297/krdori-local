@@ -1,0 +1,21 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/user_udid.proto";
+
+message UserAuthPrepareResponse {
+  string api_key = 1;
+  string nonce = 2;
+  bool need_check = 3;
+}
+
+message UserAuthRequest {
+  uint64 user_id = 1;
+  string device_model = 2;
+  krdori.pb2.ce.UserUdid udid = 3;
+  string hash1 = 4;
+  string auth_type = 5;
+  string attestation_result = 7;
+  sint32 attestation_error = 8;
+  string attestation_error_msg = 9;
+}

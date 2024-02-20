@@ -1,0 +1,6 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserBackstageTalkSetReadHistoryMap {
+  map<uint32, string> entries = 1;
+}

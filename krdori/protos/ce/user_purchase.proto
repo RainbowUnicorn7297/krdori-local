@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserPurchase {
+  uint64 user_id = 1;
+  uint32 purchase_id = 2;
+  uint32 count = 3;
+}
+
+message UserPurchaseMap {
+  map<uint32, krdori.pb2.ce.UserPurchase> entries = 1;
+}

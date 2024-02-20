@@ -1,0 +1,16 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserLiveBoost {
+  uint64 user_id = 1;
+  uint32 live_boost = 2;
+  // uint64 recover_at = 3;
+  uint64 server_date = 4;
+  // krdori.pb2.ce.UserPaidStarRecallResponseWithUser user_paid_star_recall_response_with_user = 5;
+  string live_boost_bonus_type = 6;
+}
+
+message UserLiveBoostUseFull {
+  uint32 daily_use_full_count = 1;
+  uint64 reset_time = 2;
+}

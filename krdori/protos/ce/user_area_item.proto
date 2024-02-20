@@ -1,0 +1,16 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/newly_opened_content.proto";
+
+message UserAreaItem {
+  uint64 user_id = 1;
+  uint32 area_item_id = 2;
+  uint32 area_item_category = 3;
+  uint32 level = 4;
+}
+
+message UserAreaItemMap {
+  map<uint32, krdori.pb2.ce.UserAreaItem> entries = 1;
+  krdori.pb2.ce.NewlyOpenedContentList newly_opened_contents = 2;
+}

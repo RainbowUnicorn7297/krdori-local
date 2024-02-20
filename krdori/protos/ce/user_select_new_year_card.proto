@@ -1,0 +1,16 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserSelectNewYearCard {
+  uint64 user_id = 1;
+  uint32 new_year_card_id = 2;
+  uint32 band_id = 3;
+  bool is_granted_new_year_card = 4;
+  string asset_bundle_file_name = 101;
+  string image_url_for_end_of_the_year = 102;
+  string image_url_for_beginning_of_the_year = 103;
+}
+
+message UserSelectNewYearCardMap {
+  map<uint32, krdori.pb2.ce.UserSelectNewYearCard> entries = 1;
+}

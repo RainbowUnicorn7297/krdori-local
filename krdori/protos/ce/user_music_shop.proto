@@ -1,0 +1,20 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMusicShop {
+  uint64 user_id = 1;
+  uint32 music_shop_id = 2;
+  uint32 shop_id = 3;
+  string shop_category = 4;
+  uint32 music_id = 5;
+  string status = 6;
+  uint32 seq = 7;
+}
+
+message UserMusicShopList {
+  repeated krdori.pb2.ce.UserMusicShop entries = 1;
+}
+
+message UserMusicShopMap {
+  map<uint32, krdori.pb2.ce.UserMusicShopList> entries = 1;
+}

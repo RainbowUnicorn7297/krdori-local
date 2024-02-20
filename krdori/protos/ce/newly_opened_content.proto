@@ -1,0 +1,13 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message NewlyOpenedContent {
+  uint64 user_id = 1;
+  uint32 area_item_id = 2;
+  uint32 area_item_category = 3;
+  uint32 level = 4;
+}
+
+message NewlyOpenedContentList {
+  repeated krdori.pb2.ce.NewlyOpenedContent entries = 1;
+}

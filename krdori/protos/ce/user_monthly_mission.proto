@@ -1,0 +1,9 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMonthlyMission {
+  uint32 mission_season_id = 1;
+  uint32 live_point = 2;
+  bool is_purchase_premium_mission_pass = 3;
+  // bool should_receive_last_reward = 4;
+}

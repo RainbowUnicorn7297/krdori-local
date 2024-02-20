@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserGenericAnimation {
+  uint64 user_id = 1;
+  uint32 generic_animation_id = 2;
+  string status = 3;
+}
+
+message UserGenericAnimationMap {
+  map<uint32, krdori.pb2.ce.UserGenericAnimation> entries = 1;
+}

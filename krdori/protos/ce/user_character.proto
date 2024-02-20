@@ -1,0 +1,14 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserCharacter {
+  // uint64 user_character_id = 1;
+  uint64 user_id = 2;
+  uint32 character_id = 3;
+  // uint32 closeness = 4;
+  uint32 costume_id = 5;
+}
+
+message UserCharacterMap {
+  map<uint32, krdori.pb2.ce.UserCharacter> entries = 1;
+}

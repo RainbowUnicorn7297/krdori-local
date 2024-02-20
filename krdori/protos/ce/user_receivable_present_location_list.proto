@@ -1,0 +1,6 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserReceivablePresentLocationList {
+  repeated string location_list = 1;
+}

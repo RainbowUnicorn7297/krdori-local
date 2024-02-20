@@ -1,0 +1,15 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/user_event_story.proto";
+
+message UserEventStoryMemorial {
+  uint32 event_id = 1;
+  krdori.pb2.ce.UserEventStoryList user_event_story_list = 2;
+  bool is_exist_un_read_story = 3;
+  bool is_locked = 4;
+}
+
+message UserEventStoryMemorialMap {
+  map<uint32, krdori.pb2.ce.UserEventStoryMemorial> entries = 1;
+}

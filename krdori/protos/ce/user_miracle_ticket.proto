@@ -1,0 +1,17 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMiracleTicket {
+  uint64 user_id = 1;
+  uint32 miracle_ticket_id = 2;
+  uint32 quantity = 3;
+  uint64 exchange_end_at = 4;
+}
+
+message UserMiracleTicketMap {
+  map<uint32, krdori.pb2.ce.UserMiracleTicket> entries = 1;
+}
+
+message UserNotHaveViewExchangesMiracleTicketIdList {
+  repeated uint32 entries = 1;
+}

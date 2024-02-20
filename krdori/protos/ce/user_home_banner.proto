@@ -1,0 +1,10 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserHomeBanner {
+  uint32 home_banner_id = 1;
+}
+
+message UserHomeBannerList {
+  repeated krdori.pb2.ce.UserHomeBanner entries = 1;
+}

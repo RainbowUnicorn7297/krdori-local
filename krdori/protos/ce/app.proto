@@ -1,0 +1,15 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message AppGetResponse {
+  string client_version = 1;
+  string data_version = 2;
+  string app_status = 3;
+  string client_status = 4;
+  string schema = 5;
+  string gacha = 7;
+  string multi_live = 8;
+  string star_shop = 9;
+  string master_data_version = 10;
+  string photon_app_id = 11;
+}

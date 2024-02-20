@@ -1,0 +1,33 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserDeckRating {
+  string attribute = 1;
+  uint32 leader = 2;
+  uint32 member1 = 3;
+  uint32 member2 = 4;
+  uint32 member3 = 5;
+  uint32 member4 = 6;
+  string rank = 7;
+  uint32 score = 8;
+  uint32 level = 9;
+  uint32 lower_rating = 10;
+  uint32 upper_rating = 11;
+}
+
+message UserDeckTotalRating {
+  string rank = 1;
+  uint32 score = 2;
+  uint32 level = 3;
+  uint32 lower_rating = 4;
+  uint32 upper_rating = 5;
+}
+
+message UserBandDeckRating {
+  repeated krdori.pb2.ce.UserDeckRating deck_rating = 1;
+  krdori.pb2.ce.UserDeckTotalRating total_rating = 2;
+}
+
+message UserBandDeckRatingMap {
+  map<uint32, krdori.pb2.ce.UserBandDeckRating> entries = 1;
+}

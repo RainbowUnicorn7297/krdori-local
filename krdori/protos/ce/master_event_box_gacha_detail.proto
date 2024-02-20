@@ -1,0 +1,13 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message MasterEventBoxGachaDetail {
+  uint32 event_box_gacha_id = 1;
+  uint32 round = 2;
+  uint32 seq = 3;
+  uint32 count = 4;
+  string resource_type = 5;
+  uint32 resource_id = 6;
+  uint32 resource_quantity = 7;
+  bool pickup_flag = 8;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserExchanges {
+  uint64 user_id = 1;
+  uint32 exchanges_id = 2;
+  uint32 remain = 3;
+  uint64 reset_at = 4;
+}
+
+message UserExchangesList {
+  repeated krdori.pb2.ce.UserExchanges entries = 1;
+}

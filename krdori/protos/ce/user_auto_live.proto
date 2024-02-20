@@ -1,0 +1,7 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserAutoLive {
+  uint32 daily_auto_live_use_count = 1;
+  uint64 reset_time = 2;
+}

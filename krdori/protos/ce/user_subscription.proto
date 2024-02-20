@@ -1,0 +1,20 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserSubscription {
+  uint64 user_id = 1;
+  uint32 purchase_id = 2;
+  string provider = 3;
+  uint32 payment_count = 4;
+  string status = 5;
+  uint64 expired_at = 6;
+  bool must_notify_expiration = 7;
+  bool must_notify_subscription_bonus = 8;
+  bool must_notify_other_platform_subscription = 9;
+  bool must_notify_duplicate_subscription = 10;
+  bool live_boost_bonus_enabled = 11;
+}
+
+message UserSubscriptionList {
+  repeated krdori.pb2.ce.UserSubscription entries = 1;
+}

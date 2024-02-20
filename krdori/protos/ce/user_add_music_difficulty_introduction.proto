@@ -1,0 +1,11 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserAddMusicDifficultyIntroduction {
+  uint32 add_music_difficulty_introduction_id = 1;
+  uint32 music_id = 2;
+}
+
+message UserAddMusicDifficultyIntroductionList {
+  repeated krdori.pb2.ce.UserAddMusicDifficultyIntroduction entries = 1;
+}

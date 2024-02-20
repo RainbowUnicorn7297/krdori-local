@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMonthlyMissionReward {
+  uint32 mission_season_id = 1;
+  uint32 live_point = 2;
+  // krdori.pb2.ce.UserMonthlyMissionRewardDetailList user_monthly_mission_reward_detail_list = 3;
+}
+
+message UserMonthlyMissionRewardList {
+  repeated krdori.pb2.ce.UserMonthlyMissionReward entries = 1;
+}

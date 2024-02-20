@@ -1,0 +1,22 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserItem {
+  uint64 user_id = 1;
+  uint32 item_id = 2;
+  uint32 quantity = 3;
+}
+
+message UserItemList {
+  repeated krdori.pb2.ce.UserItem entries = 1;
+}
+
+message UserLimitedItem {
+  uint64 user_id = 1;
+  uint32 limited_item_id = 2;
+  uint32 quantity = 3;
+}
+
+message UserLimitedItemList {
+  repeated krdori.pb2.ce.UserLimitedItem entries = 1;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserAppendParameter {
+  uint64 user_id = 1;
+  uint32 situation_id = 2;
+  uint32 performance = 3;
+  uint32 technique = 4;
+  uint32 visual = 5;
+}
+
+message UserAppendParameterMap {
+  map<string, krdori.pb2.ce.UserAppendParameter> entries = 1;
+}

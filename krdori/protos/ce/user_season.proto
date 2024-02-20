@@ -1,0 +1,8 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserSeason {
+  uint32 season_id = 1;
+  repeated uint32 season_special_id_list = 2;
+  map<uint32, uint32> area_season_special_id_map = 3;
+}

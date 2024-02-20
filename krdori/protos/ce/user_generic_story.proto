@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserGenericStory {
+  uint64 user_id = 1;
+  uint32 generic_story_id = 2;
+  string status = 3;
+}
+
+message UserGenericStoryMap {
+  map<uint32, krdori.pb2.ce.UserGenericStory> entries = 1;
+}

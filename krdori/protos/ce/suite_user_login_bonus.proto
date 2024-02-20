@@ -1,0 +1,8 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/suite_user.proto";
+
+message SuiteUserLoginBonusAcceptAllResponse {
+  krdori.pb2.ce.SuiteUserGetResponse update_resources = 1;
+}

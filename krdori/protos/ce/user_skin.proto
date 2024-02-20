@@ -1,0 +1,11 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserSkinLane {
+  uint32 user_id = 1;
+  uint32 skin_lane_id = 2;
+}
+
+message UserSkinLaneMap {
+  map<uint32, krdori.pb2.ce.UserSkinLane> entries = 1;
+}

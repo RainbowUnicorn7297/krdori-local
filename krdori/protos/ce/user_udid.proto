@@ -1,0 +1,7 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserUdid {
+  string ad_id = 1;
+  string identifier = 2;
+}

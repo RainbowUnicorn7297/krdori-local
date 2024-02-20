@@ -1,0 +1,16 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserGachaCountCeiling {
+  uint64 user_id = 1;
+  uint32 gacha_id = 2;
+  uint32 total_count = 3;
+  uint32 gacha_seal = 4;
+  bool is_inherit_gacha_seal_different_gacha = 5;
+  bool is_expired_exchange_item = 6;
+  uint32 exchange_star_seal_count = 7;
+}
+
+message UserGachaCountCeilingMap {
+  map<uint32, krdori.pb2.ce.UserGachaCountCeiling> entries = 1;
+}

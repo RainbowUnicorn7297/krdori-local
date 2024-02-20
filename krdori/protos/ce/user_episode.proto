@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserEpisode {
+  uint64 user_id = 1;
+  uint32 episode_id = 2;
+  string episode_status = 3;
+}
+
+message UserEpisodeMap {
+  map<string, krdori.pb2.ce.UserEpisode> entries = 1;
+}

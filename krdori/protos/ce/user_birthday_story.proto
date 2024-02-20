@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserBirthdayStory {
+  uint64 user_id = 1;
+  uint32 birthday_story_id = 2;
+  string status = 3;
+}
+
+message UserBirthdayStoryMap {
+  map<uint32, krdori.pb2.ce.UserBirthdayStory> entries = 1;
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/user_music_score.proto";
+
+message UserMusicInventory {
+  uint64 user_id = 1;
+  uint32 music_id = 2;
+  uint32 seq = 3;
+  krdori.pb2.ce.UserMusicScoreMap user_music_score_map = 5;  // field deleted from client
+  bool has_mv = 6;
+  bool is_favorite = 7;
+  map<uint32, bool> favorite_map = 8;
+}
+
+message UserMusicInventoryList {
+  repeated krdori.pb2.ce.UserMusicInventory entries = 1;
+}

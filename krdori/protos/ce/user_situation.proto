@@ -1,0 +1,20 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserSituation {
+  uint64 user_id = 1;
+  uint32 situation_id = 2;
+  uint32 level = 3;
+  uint32 exp = 4;
+  uint64 created_at = 5;
+  uint32 add_exp = 6;
+  string training_status = 7;
+  uint32 duplicate_count = 8;
+  string illust = 9;
+  uint32 skill_exp = 10;
+  uint32 skill_level = 11;
+}
+
+message UserSituationMap {
+  map<uint32, krdori.pb2.ce.UserSituation> entries = 1;
+}

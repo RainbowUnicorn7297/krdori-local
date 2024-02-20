@@ -1,0 +1,22 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserCommentBanner {
+  string asset_bundle_name = 1;
+  uint64 published_at = 2;
+  uint64 closed_at = 3;
+  string url = 4;
+  string comment = 5;
+  string transition_method = 6;
+  uint32 comment_banner_id = 7;
+  bool is_once_comment = 8;
+  uint32 transition_id = 9;
+  uint32 release_rank_from = 10;
+  uint32 release_rank_to = 11;
+  string icon_type = 12;
+  bool icon_view_flg = 13;
+}
+
+message UserCommentBannerList {
+  repeated krdori.pb2.ce.UserCommentBanner entries = 1;
+}

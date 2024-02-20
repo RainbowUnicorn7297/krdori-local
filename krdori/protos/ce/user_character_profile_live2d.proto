@@ -1,0 +1,15 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserCharacterProfileLive2d {
+  uint32 character_id = 1;
+  uint32 live2d_id = 2;
+}
+
+message UserCharacterProfileLive2dList {
+  repeated krdori.pb2.ce.UserCharacterProfileLive2d entries = 1;
+}
+
+message UserCharacterProfileLive2dMap {
+  map<uint32, krdori.pb2.ce.UserCharacterProfileLive2dList> entries = 1;
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMission {
+  uint64 user_id = 1;
+  uint32 mission_id = 2;
+  uint32 seq = 3;
+  uint32 progress = 4;
+  string mission_progress_type = 5;
+  uint32 mission_group_id = 6;
+}
+
+message UserMissionList {
+  repeated krdori.pb2.ce.UserMission entries = 1;
+}
+
+message UserMissionMap {
+  map<uint32, krdori.pb2.ce.UserMissionList> entries = 1;
+  uint64 limited_last_updated_at = 2;
+}
+
+message UserPanelMissionPanel {
+  uint32 panel_seq = 1;
+  uint32 progress = 2;
+  string mission_progress_type = 3;
+}
+
+message UserPanelMissionBoard {
+  uint32 panel_seq = 1;
+  string mission_progress_type = 2;
+  repeated krdori.pb2.ce.UserPanelMissionPanel user_panel_mission_panel_list = 3;
+}
+
+message UserPanelMission {
+  uint32 panel_mission_id = 1;
+  repeated krdori.pb2.ce.UserPanelMissionBoard user_panel_mission_board_list = 2;
+}
+
+message UserPanelMissionList {
+  repeated krdori.pb2.ce.UserPanelMission entries = 1;
+}

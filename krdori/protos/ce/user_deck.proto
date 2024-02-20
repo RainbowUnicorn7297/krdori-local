@@ -1,0 +1,22 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserDeck {
+  uint32 deck_id = 1;
+  string deck_name = 2;
+  uint32 leader = 3;
+  uint32 member1 = 4;
+  uint32 member2 = 5;
+  uint32 member3 = 6;
+  uint32 member4 = 7;
+  // repeated uint32 bonds_effect_ids = 8;
+  string deck_type = 10;
+}
+
+message UserDeckMap {
+  map<uint32, krdori.pb2.ce.UserDeck> entries = 1;
+}
+
+message UserDeckList {
+  repeated krdori.pb2.ce.UserDeck entries = 1;
+}

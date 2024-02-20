@@ -1,0 +1,44 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserStageChallengeStageNo {
+  uint64 user_id = 1;
+  uint32 stage_challenge_id = 2;
+  uint32 stage_challenge_stage_no = 3;
+  uint32 achivement_count = 4;
+}
+
+message UserStageChallengeStageNoList {
+  repeated krdori.pb2.ce.UserStageChallengeStageNo entries = 1;
+}
+
+message UserStageChallengeStageNoMap {
+  map<uint32, krdori.pb2.ce.UserStageChallengeStageNoList> entries = 1;
+}
+
+message UserStageChallenge {
+  uint64 user_id = 1;
+  uint32 stage_challenge_id = 2;
+  uint32 seq = 3;
+  uint32 total_achievement_count = 4;
+}
+
+message UserStageChallengeMap {
+  map<uint32, krdori.pb2.ce.UserStageChallenge> entries = 1;
+}
+
+message UserStageChallengeScore {
+  uint64 user_id = 1;
+  uint32 stage_challenge_id = 2;
+  uint32 stage_challenge_stage_no = 3;
+  string music_difficulty = 4;
+  uint32 high_score = 5;
+}
+
+message UserStageChallengeScoreList {
+  repeated krdori.pb2.ce.UserStageChallengeScore entries = 1;
+}
+
+message UserStageChallengeScoreMap {
+  map<uint32, krdori.pb2.ce.UserStageChallengeScoreList> entries = 1;
+}

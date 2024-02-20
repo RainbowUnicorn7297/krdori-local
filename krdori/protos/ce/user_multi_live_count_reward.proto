@@ -1,0 +1,10 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMultiLiveCountReward {
+  uint32 multi_live_count_id = 1;
+}
+
+message UserMultiLiveCountRewardList {
+  repeated krdori.pb2.ce.UserMultiLiveCountReward entries = 1;
+}

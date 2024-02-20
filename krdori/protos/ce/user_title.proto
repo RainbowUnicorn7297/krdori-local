@@ -1,0 +1,21 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserTitle {
+  uint32 title_id = 1;
+  string asset_bundle_name = 2;
+  uint64 public_start_at = 3;
+  uint64 public_end_at = 4;
+  string voice_asset_bundle_name = 5;
+  bool title_back = 6;
+  string logo_position = 7;
+  string live2d_text_color = 8;
+  string asset_bundle_copyright = 9;
+  string asset_bundle_rights = 10;
+  uint32 display_priority = 11;
+  uint32 band_id = 12;
+}
+
+message UserTitleList {
+  repeated krdori.pb2.ce.UserTitle entries = 1;
+}

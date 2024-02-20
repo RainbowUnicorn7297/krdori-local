@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserGachaTicket {
+  uint64 user_id = 1;
+  uint32 gacha_ticket_id = 2;
+  uint32 quantity = 3;
+}
+
+message UserGachaTicketList {
+  repeated krdori.pb2.ce.UserGachaTicket entries = 1;
+}

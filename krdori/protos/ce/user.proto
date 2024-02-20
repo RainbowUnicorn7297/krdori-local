@@ -1,0 +1,74 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/user_udid.proto";
+
+message UserPostRequest {
+  string client_version = 4;
+  string platform = 5;
+  string device_model = 6;
+  string operating_system = 7;
+  krdori.pb2.ce.UserUdid udid = 21;
+  string kakao_id = 100;
+  string kakao_guest_flg = 101;
+}
+
+message UserRegistration {
+  uint64 user_id = 1;
+  string hash = 2;
+  string user_name = 3;
+  string client_version = 4;
+  string platform = 5;
+  string device_model = 6;
+  string operating_system = 7;
+  string birth_month = 9;
+  string tutorial_status = 10;
+  string introduction = 11;
+  string unknown_string = 12;
+  uint64 tutorial_ended_at = 13;
+  string kakao_id = 100;  // field deleted from client
+  string kakao_guest_flg = 101;  // field deleted from client
+}
+
+message UserGamedata {
+  uint64 user_id = 1;
+  uint32 rank = 2;
+  uint32 exp = 3;
+  uint64 coin = 4;
+  uint32 main_deck = 5;
+  uint32 paid_star = 6;
+  uint32 free_star = 7;
+  uint32 seal = 8;
+  uint32 degree = 9;
+  bool publish_total_deck_power_flg = 10;
+  bool publish_band_rank_flg = 11;
+  bool publish_music_cleared_flg = 12;
+  bool publish_music_full_combo_flg = 13;
+  bool publish_high_score_rating_flg = 14;
+  uint64 pooled_exp = 15;
+  uint64 total_exp = 16;
+  uint32 next_exp = 17;
+  bool publish_updated_at_flg = 18;
+  bool unknown_bool_19 = 19;
+  bool unknown_bool_20 = 20;
+  bool unknown_bool_21 = 21;
+  // krdori.pb2.ce.UserPaidStarRecallResponse user_paid_star_recall_response = 22;
+  bool start_dash_login_bonus_receive_flg = 23;
+  bool publish_music_all_perfect_flg = 24;
+  bool publish_deck_rank_flg = 25;
+  bool publish_stage_achievement_conditions_flg = 26;
+  bool publish_stage_friend_ranking_flg = 27;
+}
+
+message UserGetResponse {
+  krdori.pb2.ce.UserRegistration user_registration = 1;
+  krdori.pb2.ce.UserGamedata user_gamedata = 2;
+}
+
+message UserPurchaseVoidBadPenaltyStandard {
+  uint64 user_id = 1;
+  uint32 bad_count = 2;
+  uint64 billing_penalty_date = 3;
+  uint64 penalty_date = 4;
+  uint64 bad_date = 5;
+}

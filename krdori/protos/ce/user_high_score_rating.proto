@@ -1,0 +1,27 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserHighScoreMusicRating {
+  uint32 music_id = 1;
+  string difficulty = 2;
+  uint32 rating = 3;
+}
+
+message UserHighScoreMusicRatingList {
+  repeated krdori.pb2.ce.UserHighScoreMusicRating entries = 1;
+}
+
+message UserHighScoreMusicRatingMap {
+  map<uint32, krdori.pb2.ce.UserHighScoreMusicRating> entries = 1;
+}
+
+message UserHighScoreRating {
+  krdori.pb2.ce.UserHighScoreMusicRatingList user_poppin_party_high_score_music_list = 1;
+  krdori.pb2.ce.UserHighScoreMusicRatingList user_afterglow_high_score_music_list = 2;
+  krdori.pb2.ce.UserHighScoreMusicRatingList user_pastel_palettes_high_score_music_list = 3;
+  krdori.pb2.ce.UserHighScoreMusicRatingList user_hello_happy_world_high_score_music_list = 4;
+  krdori.pb2.ce.UserHighScoreMusicRatingList user_roselia_high_score_music_list = 5;
+  krdori.pb2.ce.UserHighScoreMusicRatingList user_other_high_score_music_list = 6;
+  krdori.pb2.ce.UserHighScoreMusicRatingList user_morfonica_high_score_music_list = 7;
+  krdori.pb2.ce.UserHighScoreMusicRatingList user_raise_a_suilen_high_score_music_list = 8;
+}

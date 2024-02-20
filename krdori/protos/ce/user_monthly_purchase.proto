@@ -1,0 +1,14 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMonthlyPurchase {
+  uint64 user_id = 1;
+  uint32 purchase_id = 2;
+  uint32 year = 3;
+  uint32 month = 4;
+  uint32 count = 5;
+}
+
+message UserMonthlyPurchaseMap {
+  map<uint32, krdori.pb2.ce.UserMonthlyPurchase> entries = 1;
+}

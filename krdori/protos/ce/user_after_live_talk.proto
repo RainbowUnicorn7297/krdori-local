@@ -1,0 +1,15 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserAfterLiveTalk {
+  uint32 after_live_talk_id = 1;
+  string after_live_talk_type = 2;
+}
+
+message UserAfterLiveTalkList {
+  repeated krdori.pb2.ce.UserAfterLiveTalk entries = 1;
+}
+
+message UserAfterLiveTalkListMap {
+  map<string, krdori.pb2.ce.UserAfterLiveTalkList> entries = 1;
+}

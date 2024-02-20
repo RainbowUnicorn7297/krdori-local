@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserDigestStory {
+  uint64 user_id = 1;
+  uint32 digest_story_id = 2;
+  string status = 3;
+}
+
+message UserDigestStoryList {
+  repeated krdori.pb2.ce.UserDigestStory entries = 1;
+}

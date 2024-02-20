@@ -1,0 +1,27 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/master_event_box_gacha_detail.proto";
+
+message UserEventBoxGachaRemain {
+  uint32 seq = 1;
+  uint32 remain_count = 2;
+}
+
+message UserEventBoxGacha {
+  uint64 user_id = 1;
+  uint32 event_box_gacha_id = 2;
+  uint32 round = 3;
+  repeated krdori.pb2.ce.UserEventBoxGachaRemain remains = 101;
+  krdori.pb2.ce.MasterEventBoxGachaDetail pickup_detail = 102;
+  krdori.pb2.ce.UserEventBoxGachaRemain pickup_remain = 103;
+}
+
+message UserEventBoxGachaMap {
+  map<uint32, krdori.pb2.ce.UserEventBoxGacha> entries = 1;
+}
+
+message UserEventBoxGachaSpinSettings {
+  bool lump_spin_flg = 1;
+  bool auto_stop_flg = 2;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserProfileDegree {
+  uint64 user_id = 1;
+  string profile_degree_type = 2;
+  uint32 degree_id = 3;
+}
+
+message UserProfileDegreeMap {
+  map<string, krdori.pb2.ce.UserProfileDegree> entries = 1;
+}

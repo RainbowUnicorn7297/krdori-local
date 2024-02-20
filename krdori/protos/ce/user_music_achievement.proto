@@ -1,0 +1,16 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserMusicAchievement {
+  uint64 user_id = 1;
+  uint32 music_id = 2;
+  string achievement_type = 3;
+}
+
+message UserMusicAchievementList {
+  repeated krdori.pb2.ce.UserMusicAchievement entries = 1;
+}
+
+message UserMusicAchievementMap {
+  map<uint32, krdori.pb2.ce.UserMusicAchievementList> entries = 1;
+}

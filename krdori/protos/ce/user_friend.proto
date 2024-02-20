@@ -1,0 +1,23 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserFriendRelation {
+  uint64 user_id = 1;
+  string status = 2;
+  uint64 opponent_user_id = 3;
+  uint64 friend_updated_at = 4;
+  uint64 last_changed_user_id = 5;
+}
+
+message UserFriendRelationMap {
+  map<uint64, krdori.pb2.ce.UserFriendRelation> entries = 1;
+}
+
+message UserFriendRelationDetail {
+  krdori.pb2.ce.UserFriendRelationMap application_map = 1;
+  krdori.pb2.ce.UserFriendRelationMap approval_map = 2;
+  krdori.pb2.ce.UserFriendRelationMap friend_map = 3;
+  uint32 application_limit = 4;
+  uint32 approval_limit = 5;
+  uint32 friend_limit = 6;
+}
