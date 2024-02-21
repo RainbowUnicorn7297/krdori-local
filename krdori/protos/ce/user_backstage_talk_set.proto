@@ -1,6 +1,29 @@
 syntax = "proto3";
 package krdori.pb2.ce;
 
+message UserBackstageTalkSet {
+  uint32 backstage_talk_set_id = 1;
+  bool is_enliven_talk_set = 2;
+  uint32 lottery_seq = 3;
+}
+
+message UserBackstageTalkSetList {
+  repeated krdori.pb2.ce.UserBackstageTalkSet entries = 1;
+}
+
+message UserLotterySelectedBackstageTalkSetList {
+  repeated krdori.pb2.ce.UserBackstageTalkSetList entries = 1;
+  bool is_force_move_backstage = 2;
+}
+
+message UserLotterySelectedBackstageTalkSetListArray {
+  repeated krdori.pb2.ce.UserBackstageTalkSetList entries = 1;
+}
+
+message UserLotterySelectedBackstageTalkSetMap {
+  map<uint32, krdori.pb2.ce.UserLotterySelectedBackstageTalkSetListArray> entries = 1;
+}
+
 message UserBackstageTalkSetReadHistoryMap {
   map<uint32, string> entries = 1;
 }

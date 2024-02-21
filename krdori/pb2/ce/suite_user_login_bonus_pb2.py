@@ -12,15 +12,18 @@ _sym_db = _symbol_database.Default()
 
 
 from krdori.pb2.ce import suite_user_pb2 as krdori_dot_pb2_dot_ce_dot_suite__user__pb2
+from krdori.pb2.ce import user_login_bonus_pb2 as krdori_dot_pb2_dot_ce_dot_user__login__bonus__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n*krdori/pb2/ce/suite_user_login_bonus.proto\x12\rkrdori.pb2.ce\x1a\x1ekrdori/pb2/ce/suite_user.proto\"e\n$SuiteUserLoginBonusAcceptAllResponse\x12=\n\x10update_resources\x18\x01 \x01(\x0b\x32#.krdori.pb2.ce.SuiteUserGetResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n*krdori/pb2/ce/suite_user_login_bonus.proto\x12\rkrdori.pb2.ce\x1a\x1ekrdori/pb2/ce/suite_user.proto\x1a$krdori/pb2/ce/user_login_bonus.proto\"\x8c\x01\n\x13SuiteUserLoginBonus\x12=\n\x10update_resources\x18\x01 \x01(\x0b\x32#.krdori.pb2.ce.SuiteUserGetResponse\x12\x36\n\x0f\x61\x63\x63\x65pt_response\x18\x03 \x01(\x0b\x32\x1d.krdori.pb2.ce.AcceptResponse\"e\n$SuiteUserLoginBonusAcceptAllResponse\x12=\n\x10update_resources\x18\x01 \x01(\x0b\x32#.krdori.pb2.ce.SuiteUserGetResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'krdori.pb2.ce.suite_user_login_bonus_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_SUITEUSERLOGINBONUSACCEPTALLRESPONSE']._serialized_start=93
-  _globals['_SUITEUSERLOGINBONUSACCEPTALLRESPONSE']._serialized_end=194
+  _globals['_SUITEUSERLOGINBONUS']._serialized_start=132
+  _globals['_SUITEUSERLOGINBONUS']._serialized_end=272
+  _globals['_SUITEUSERLOGINBONUSACCEPTALLRESPONSE']._serialized_start=274
+  _globals['_SUITEUSERLOGINBONUSACCEPTALLRESPONSE']._serialized_end=375
 # @@protoc_insertion_point(module_scope)

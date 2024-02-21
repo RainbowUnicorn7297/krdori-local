@@ -25,6 +25,7 @@ python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/pro
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_gacha_ticket.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_gacha_status.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_area_status.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/master_player_resource.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_login_bonus.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_home_banner.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_stamp.proto
@@ -96,3 +97,4 @@ python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/pro
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/suite_user.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/suite_user_login_bonus.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/server_system.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_area.proto

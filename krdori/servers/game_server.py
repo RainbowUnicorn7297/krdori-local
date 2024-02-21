@@ -9,7 +9,7 @@ from flask import Flask, Request, request, Response
 # from google.protobuf import wrappers_pb2
 
 from krdori.pb2.ce import (
-    app_pb2, server_system_pb2, suite_user_login_bonus_pb2, suite_user_pb2, user_auth_pb2, user_pb2
+    app_pb2, server_system_pb2, suite_user_login_bonus_pb2, suite_user_pb2, user_area_pb2, user_auth_pb2, user_pb2
 )
 
 # Port used by the game server
@@ -144,7 +144,7 @@ def suite_user_api(user_id):
     g.rank = 38
     g.exp = 1980
     g.coin = 2603500
-    g.main_deck = 2
+    g.main_deck = 1
     g.paid_star = 0
     g.free_star = 70175
     g.seal = 0
@@ -433,7 +433,7 @@ def suite_user_api(user_id):
     b = o.user_login_bonus_map.entries[1]
     b.user_id = user_id
     b.login_bonus_id = 1
-    b.days = 1
+    b.days = 5
 
     b = o.user_home_banner_list.entries.add()
     b.home_banner_id = 1283
@@ -764,6 +764,8 @@ def suite_user_api(user_id):
     o.user_monthly_mission.live_point = 0
     o.user_monthly_mission.is_purchase_premium_mission_pass = False
 
+    # with open('suite_user_get_response.txtpb', 'w', encoding='utf-8') as f:
+    #     f.write(str(o))
     return o.SerializeToString()
 
 
@@ -844,6 +846,39 @@ def get_server_system_api():
     o = server_system_pb2.ServerSystem()
     o.server_date = int(time.time()*1000)
     o.time_zone_raw_offset = 32_400_000
+    return o.SerializeToString()
+
+
+@app.get('/api/cleanupinfo')
+def get_cleanup_info_api():
+    with open('krdori/responses/cleanup_info.binpb', 'rb') as f:
+        o = f.read()
+    return o
+
+
+@app.get('/api/suite/user/<int:user_id>/area')
+def get_user_area_character_api(user_id):
+    with open('krdori/responses/user_area.binpb', 'rb') as f:
+        o = user_area_pb2.UserArea.FromString(f.read())
+    return o.SerializeToString()
+
+
+@app.put('/api/suite/user/<int:user_id>/loginbonus/<int:login_bonus_id>/watch')
+def suite_login_bonus_api(user_id, login_bonus_id):
+    o = suite_user_login_bonus_pb2.SuiteUserLoginBonus()
+
+    b = o.update_resources.user_live_boost
+    b.user_id = user_id
+    b.live_boost = 10
+    b.server_date = int(time.time()*1000)
+    b.live_boost_bonus_type = 'default'
+
+    r = o.accept_response.player_resources.entries.add()
+    r.resource_id = 1
+    r.resource_type = 'practice_ticket'
+    r.quantity = 5
+    r.lb_bonus = 1
+
     return o.SerializeToString()
 
 

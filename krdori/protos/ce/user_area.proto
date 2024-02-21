@@ -1,0 +1,28 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/user_backstage_talk_set.proto";
+import "krdori/pb2/ce/user_season.proto";
+
+message UserActionSet {
+  uint32 action_set_id = 1;
+  string status = 2;
+}
+
+message UserAreaResponse {
+  uint32 area_id = 1;
+  repeated krdori.pb2.ce.UserActionSet action_sets = 2;
+  repeated uint32 area_item_ids = 3;
+}
+
+message UserAreaMap {
+  map<uint32, krdori.pb2.ce.UserAreaResponse> entries = 1;
+}
+
+message UserArea {
+  // krdori.pb2.ce.UserDestinations user_destinations = 1;
+  krdori.pb2.ce.UserAreaMap user_area_map = 2;
+  krdori.pb2.ce.UserLotterySelectedBackstageTalkSetList backstage = 3;
+  krdori.pb2.ce.UserSeason user_season = 4;
+  krdori.pb2.ce.UserLotterySelectedBackstageTalkSetMap user_lottery_selected_backstage_talk_set_map = 5;
+}

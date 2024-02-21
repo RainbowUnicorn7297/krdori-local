@@ -11,9 +11,10 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
+from krdori.pb2.ce import master_player_resource_pb2 as krdori_dot_pb2_dot_ce_dot_master__player__resource__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n$krdori/pb2/ce/user_login_bonus.proto\x12\rkrdori.pb2.ce\"G\n\x0eUserLoginBonus\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x16\n\x0elogin_bonus_id\x18\x02 \x01(\r\x12\x0c\n\x04\x64\x61ys\x18\x03 \x01(\r\"\xa2\x01\n\x11UserLoginBonusMap\x12>\n\x07\x65ntries\x18\x01 \x03(\x0b\x32-.krdori.pb2.ce.UserLoginBonusMap.EntriesEntry\x1aM\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12,\n\x05value\x18\x02 \x01(\x0b\x32\x1d.krdori.pb2.ce.UserLoginBonus:\x02\x38\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n$krdori/pb2/ce/user_login_bonus.proto\x12\rkrdori.pb2.ce\x1a*krdori/pb2/ce/master_player_resource.proto\"G\n\x0eUserLoginBonus\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x16\n\x0elogin_bonus_id\x18\x02 \x01(\r\x12\x0c\n\x04\x64\x61ys\x18\x03 \x01(\r\"\xa2\x01\n\x11UserLoginBonusMap\x12>\n\x07\x65ntries\x18\x01 \x03(\x0b\x32-.krdori.pb2.ce.UserLoginBonusMap.EntriesEntry\x1aM\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12,\n\x05value\x18\x02 \x01(\x0b\x32\x1d.krdori.pb2.ce.UserLoginBonus:\x02\x38\x01\"\x87\x01\n\x0e\x41\x63\x63\x65ptResponse\x12;\n\x10player_resources\x18\x01 \x01(\x0b\x32!.krdori.pb2.ce.PlayerResourceList\x12\x38\n\rgranted_bonus\x18\x02 \x01(\x0b\x32!.krdori.pb2.ce.PlayerResourceListb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,10 +23,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _USERLOGINBONUSMAP_ENTRIESENTRY._options = None
   _USERLOGINBONUSMAP_ENTRIESENTRY._serialized_options = b'8\001'
-  _globals['_USERLOGINBONUS']._serialized_start=55
-  _globals['_USERLOGINBONUS']._serialized_end=126
-  _globals['_USERLOGINBONUSMAP']._serialized_start=129
-  _globals['_USERLOGINBONUSMAP']._serialized_end=291
-  _globals['_USERLOGINBONUSMAP_ENTRIESENTRY']._serialized_start=214
-  _globals['_USERLOGINBONUSMAP_ENTRIESENTRY']._serialized_end=291
+  _globals['_USERLOGINBONUS']._serialized_start=99
+  _globals['_USERLOGINBONUS']._serialized_end=170
+  _globals['_USERLOGINBONUSMAP']._serialized_start=173
+  _globals['_USERLOGINBONUSMAP']._serialized_end=335
+  _globals['_USERLOGINBONUSMAP_ENTRIESENTRY']._serialized_start=258
+  _globals['_USERLOGINBONUSMAP_ENTRIESENTRY']._serialized_end=335
+  _globals['_ACCEPTRESPONSE']._serialized_start=338
+  _globals['_ACCEPTRESPONSE']._serialized_end=473
 # @@protoc_insertion_point(module_scope)

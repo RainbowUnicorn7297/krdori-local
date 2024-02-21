@@ -13,17 +13,31 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n+krdori/pb2/ce/user_backstage_talk_set.proto\x12\rkrdori.pb2.ce\"\xa5\x01\n\"UserBackstageTalkSetReadHistoryMap\x12O\n\x07\x65ntries\x18\x01 \x03(\x0b\x32>.krdori.pb2.ce.UserBackstageTalkSetReadHistoryMap.EntriesEntry\x1a.\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n+krdori/pb2/ce/user_backstage_talk_set.proto\x12\rkrdori.pb2.ce\"g\n\x14UserBackstageTalkSet\x12\x1d\n\x15\x62\x61\x63kstage_talk_set_id\x18\x01 \x01(\r\x12\x1b\n\x13is_enliven_talk_set\x18\x02 \x01(\x08\x12\x13\n\x0blottery_seq\x18\x03 \x01(\r\"P\n\x18UserBackstageTalkSetList\x12\x34\n\x07\x65ntries\x18\x01 \x03(\x0b\x32#.krdori.pb2.ce.UserBackstageTalkSet\"\x84\x01\n\'UserLotterySelectedBackstageTalkSetList\x12\x38\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\'.krdori.pb2.ce.UserBackstageTalkSetList\x12\x1f\n\x17is_force_move_backstage\x18\x02 \x01(\x08\"h\n,UserLotterySelectedBackstageTalkSetListArray\x12\x38\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\'.krdori.pb2.ce.UserBackstageTalkSetList\"\xea\x01\n&UserLotterySelectedBackstageTalkSetMap\x12S\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x42.krdori.pb2.ce.UserLotterySelectedBackstageTalkSetMap.EntriesEntry\x1ak\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12J\n\x05value\x18\x02 \x01(\x0b\x32;.krdori.pb2.ce.UserLotterySelectedBackstageTalkSetListArray:\x02\x38\x01\"\xa5\x01\n\"UserBackstageTalkSetReadHistoryMap\x12O\n\x07\x65ntries\x18\x01 \x03(\x0b\x32>.krdori.pb2.ce.UserBackstageTalkSetReadHistoryMap.EntriesEntry\x1a.\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'krdori.pb2.ce.user_backstage_talk_set_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
+  _USERLOTTERYSELECTEDBACKSTAGETALKSETMAP_ENTRIESENTRY._options = None
+  _USERLOTTERYSELECTEDBACKSTAGETALKSETMAP_ENTRIESENTRY._serialized_options = b'8\001'
   _USERBACKSTAGETALKSETREADHISTORYMAP_ENTRIESENTRY._options = None
   _USERBACKSTAGETALKSETREADHISTORYMAP_ENTRIESENTRY._serialized_options = b'8\001'
-  _globals['_USERBACKSTAGETALKSETREADHISTORYMAP']._serialized_start=63
-  _globals['_USERBACKSTAGETALKSETREADHISTORYMAP']._serialized_end=228
-  _globals['_USERBACKSTAGETALKSETREADHISTORYMAP_ENTRIESENTRY']._serialized_start=182
-  _globals['_USERBACKSTAGETALKSETREADHISTORYMAP_ENTRIESENTRY']._serialized_end=228
+  _globals['_USERBACKSTAGETALKSET']._serialized_start=62
+  _globals['_USERBACKSTAGETALKSET']._serialized_end=165
+  _globals['_USERBACKSTAGETALKSETLIST']._serialized_start=167
+  _globals['_USERBACKSTAGETALKSETLIST']._serialized_end=247
+  _globals['_USERLOTTERYSELECTEDBACKSTAGETALKSETLIST']._serialized_start=250
+  _globals['_USERLOTTERYSELECTEDBACKSTAGETALKSETLIST']._serialized_end=382
+  _globals['_USERLOTTERYSELECTEDBACKSTAGETALKSETLISTARRAY']._serialized_start=384
+  _globals['_USERLOTTERYSELECTEDBACKSTAGETALKSETLISTARRAY']._serialized_end=488
+  _globals['_USERLOTTERYSELECTEDBACKSTAGETALKSETMAP']._serialized_start=491
+  _globals['_USERLOTTERYSELECTEDBACKSTAGETALKSETMAP']._serialized_end=725
+  _globals['_USERLOTTERYSELECTEDBACKSTAGETALKSETMAP_ENTRIESENTRY']._serialized_start=618
+  _globals['_USERLOTTERYSELECTEDBACKSTAGETALKSETMAP_ENTRIESENTRY']._serialized_end=725
+  _globals['_USERBACKSTAGETALKSETREADHISTORYMAP']._serialized_start=728
+  _globals['_USERBACKSTAGETALKSETREADHISTORYMAP']._serialized_end=893
+  _globals['_USERBACKSTAGETALKSETREADHISTORYMAP_ENTRIESENTRY']._serialized_start=847
+  _globals['_USERBACKSTAGETALKSETREADHISTORYMAP_ENTRIESENTRY']._serialized_end=893
 # @@protoc_insertion_point(module_scope)

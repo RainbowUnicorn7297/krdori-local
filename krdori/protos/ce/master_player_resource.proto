@@ -1,0 +1,15 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message PlayerResource {
+  uint32 resource_id = 1;
+  string resource_type = 2;
+  uint32 quantity = 3;
+  uint32 lb_bonus = 4;
+  // bool first_get = 5;
+  // uint32 duplicated_count = 6;
+}
+
+message PlayerResourceList {
+  repeated krdori.pb2.ce.PlayerResource entries = 1;
+}
