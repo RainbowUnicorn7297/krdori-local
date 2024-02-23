@@ -1,0 +1,14 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/suite_user.proto";
+import "krdori/pb2/ce/user_story.proto";
+import "krdori/pb2/ce/master_player_resource.proto";
+import "krdori/pb2/ce/newly_opened_content.proto";
+
+message SuiteUserMainStoryResponse {
+  krdori.pb2.ce.SuiteUserGetResponse update_resources = 1;
+  krdori.pb2.ce.UserMainStoryList user_main_story_list = 2;
+  krdori.pb2.ce.PlayerResourceList rewards = 3;
+  krdori.pb2.ce.NewlyOpenedContentList newly_opened_contents = 4;
+}

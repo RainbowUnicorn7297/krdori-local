@@ -105,3 +105,5 @@ python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/pro
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_story_event.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/suite_user_event_story_memorial.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/suite_user_character.proto
+
+rem python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/suite_user_story.proto

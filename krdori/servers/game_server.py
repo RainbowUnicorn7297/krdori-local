@@ -9,8 +9,9 @@ from Crypto.Util.Padding import pad
 from flask import Flask, Request, request, Response
 
 from krdori.pb2.ce import (
-    app_pb2, server_system_pb2, suite_user_character_pb2, suite_user_event_story_memorial_pb2, suite_user_login_bonus_pb2, suite_user_pb2, user_action_set_album_pb2, user_area_pb2, user_auth_pb2, user_backstage_talk_set_pb2, user_band_story_pb2, user_event_story_memorial_pb2, user_pb2
+    app_pb2, server_system_pb2, suite_user_character_pb2, suite_user_event_story_memorial_pb2, suite_user_login_bonus_pb2, suite_user_pb2, user_action_set_album_pb2, user_area_pb2, user_auth_pb2, user_backstage_talk_set_pb2, user_band_story_pb2, user_event_story_memorial_pb2, user_pb2, user_story_pb2
 )
+# from krdori.pb2.ce import suite_user_story_pb2
 
 # Port used by the game server
 _port = 5000
@@ -204,14 +205,15 @@ def suite_user_api(user_id):
     d.member4 = 5
     d.deck_type = 'normal'
 
-    s = o.user_main_story_list.entries.add()
-    s.user_id = user_id
-    s.story_id = 1
-    s.status = 'unread'
-    s = o.user_main_story_list.entries.add()
-    s.user_id = user_id
-    s.story_id = 26
-    s.status = 'unread'
+    ss = []
+    for m in _suite_master['21']['1']:  # MasterMainStoryMap
+        s = user_story_pb2.UserMainStory()
+        s.user_id = user_id
+        s.story_id = m['1']
+        s.status = 'already_read'
+        ss.append(s)
+    o.user_main_story_list.entries.extend(
+        sorted(ss, key=attrgetter('story_id'), reverse=True))
 
     for i in range(1, 10):
         b = o.user_bonds_list.entries.add()
@@ -1075,6 +1077,17 @@ def put_user_character_api(user_id, character_id, costume_id):
 def delete_user_character_api(user_id, character_id):
     o = suite_user_character_pb2.SuiteUserCharacter()
     return o.SerializeToString()
+
+
+# @app.post('/api/suite/user/<int:user_id>/mainstory/<int:main_story_id>')
+# def post_user_main_story_api(user_id, main_story_id):
+#     o = suite_user_story_pb2.SuiteUserMainStoryResponse()
+#     o.update_resources.user_main_story_list.CopyFrom(
+#         _suite_user.user_main_story_list)
+#     o.user_main_story_list.CopyFrom(_suite_user.user_main_story_list)
+#     o.rewards.SetInParent()
+#     o.newly_opened_contents.SetInParent()
+#     return o.SerializeToString()
 
 
 if __name__ == '__main__':
