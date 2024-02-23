@@ -8,5 +8,5 @@ message UserEpisode {
 }
 
 message UserEpisodeMap {
-  map<string, krdori.pb2.ce.UserEpisode> entries = 1;
+  map<uint32, krdori.pb2.ce.UserEpisode> entries = 1;
 }

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/user_event_story.proto";
+import "krdori/pb2/ce/master_player_resource.proto";
+import "krdori/pb2/ce/newly_opened_content.proto";
+
+message UserStoryEventReadStoryResponse {
+  krdori.pb2.ce.UserEventStory read_user_event_story = 1;
+  krdori.pb2.ce.PlayerResourceList rewards = 2;
+  krdori.pb2.ce.NewlyOpenedContentList newly_opened_contents = 3;
+  uint32 recommend_story_id = 4;
+  string recommend_story_type = 5;
+}

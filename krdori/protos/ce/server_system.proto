@@ -3,5 +3,5 @@ package krdori.pb2.ce;
 
 message ServerSystem {
   uint64 server_date = 1;
-  sint32 time_zone_raw_offset = 2;
+  int32 time_zone_raw_offset = 2;
 }

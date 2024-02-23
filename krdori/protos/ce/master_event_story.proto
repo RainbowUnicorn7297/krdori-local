@@ -1,0 +1,22 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message MasterEventStory {
+  uint32 event_id = 1;
+  uint32 seq = 2;
+  string caption = 3;
+  string title = 4;
+  string synopsis = 5;
+  string scenario_id = 6;
+  string cover_image = 7;
+  string background_image = 8;
+  uint64 release_pt = 9;
+  string release_conditions = 10;
+  uint32 band_story_id = 11;
+  uint32 background_image_id = 12;
+  // repeated krdori.pb2.ce.MasterEventStoryReward rewards = 13;
+}
+
+message MasterEventStoryList {
+  repeated krdori.pb2.ce.MasterEventStory entries = 1;
+}

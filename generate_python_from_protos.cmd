@@ -42,6 +42,9 @@ python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/pro
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_season.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_qualify_tournament_music_score.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_event_story.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/master_event.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/master_event_story.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/master_event_character.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_event_story_memorial.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_miracle_ticket.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_miracle_ticket_exchanges.proto
@@ -98,3 +101,7 @@ python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/pro
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/suite_user_login_bonus.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/server_system.proto
 python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_area.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_action_set_album.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/user_story_event.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/suite_user_event_story_memorial.proto
+python -m grpc_tools.protoc -Ikrdori/pb2=krdori/protos --python_out=. krdori/protos/ce/suite_user_character.proto

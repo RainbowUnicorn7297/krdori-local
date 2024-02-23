@@ -4,7 +4,7 @@ package krdori.pb2.ce;
 message UserBackstageTalkSet {
   uint32 backstage_talk_set_id = 1;
   bool is_enliven_talk_set = 2;
-  uint32 lottery_seq = 3;
+  uint32 lottery_seq = 4;
 }
 
 message UserBackstageTalkSetList {

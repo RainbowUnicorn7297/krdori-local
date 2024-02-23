@@ -2,20 +2,23 @@
 
 import json
 import time
+from operator import attrgetter
 
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from flask import Flask, Request, request, Response
-# from google.protobuf import wrappers_pb2
 
 from krdori.pb2.ce import (
-    app_pb2, server_system_pb2, suite_user_login_bonus_pb2, suite_user_pb2, user_area_pb2, user_auth_pb2, user_pb2
+    app_pb2, server_system_pb2, suite_user_character_pb2, suite_user_event_story_memorial_pb2, suite_user_login_bonus_pb2, suite_user_pb2, user_action_set_album_pb2, user_area_pb2, user_auth_pb2, user_backstage_talk_set_pb2, user_band_story_pb2, user_event_story_memorial_pb2, user_pb2
 )
 
 # Port used by the game server
 _port = 5000
 
 app = Flask(__name__)
+
+_suite_master = None
+_suite_user = None
 
 _key = b'bangdreamtokakao'
 _iv = b'kakaotobangdream'
@@ -117,8 +120,10 @@ def get_suite_master_api():
 
 @app.get('/api/suite/user/<int:user_id>')
 def suite_user_api(user_id):
+    global _suite_master, _suite_user
+
     with open('krdori/responses/suite_master.json', 'rb') as f:
-        suite_master = json.loads(f.read())
+        _suite_master = json.loads(f.read())
 
     o = suite_user_pb2.SuiteUserGetResponse()
 
@@ -173,19 +178,21 @@ def suite_user_api(user_id):
         c.character_id = i
         c.costume_id = i + 1332
 
-    for m in suite_master['4']['1']:    # MasterCharacterSituationMap
-        s = o.user_situation_map.entries[m['1']]
-        s.user_id = user_id
-        s.situation_id = m['1']
-        s.level = m['2']['11']
-        s.exp = 0
-        s.created_at = m['2']['17']
-        s.add_exp = 0
-        s.training_status = 'not_doing'
-        s.duplicate_count = 0
-        s.illust = 'normal'
-        s.skill_exp = 0
-        s.skill_level = 5
+    for m in _suite_master['4']['1']:   # MasterCharacterSituationMap
+        if m['2']['17'] < 4102444800000:
+            s = o.user_situation_map.entries[m['1']]
+            s.user_id = user_id
+            s.situation_id = m['1']
+            s.level = m['2']['11'] + (
+                m['2']['15']['3'] if '15' in m['2'] else 0)
+            s.exp = 0
+            s.created_at = m['2']['17']
+            s.add_exp = 0
+            s.training_status = 'done' if '15' in m['2'] else 'not_doing'
+            s.duplicate_count = 0
+            s.illust = 'after_training' if '15' in m['2'] else 'normal'
+            s.skill_exp = 0
+            s.skill_level = 5
 
     d = o.user_deck_map.entries[1]
     d.deck_id = 1
@@ -224,46 +231,68 @@ def suite_user_api(user_id):
         r.total_exp = 0
         r.next_exp = 400
 
-    s = o.user_poppin_party_story_list.entries.add()
-    s.user_id = user_id
-    s.band_story_id = 1
-    s.band_id = 1
-    s.status = 'unread'
-    s.seq = 1
-    s = o.user_poppin_party_story_list.entries.add()
-    s.user_id = user_id
-    s.band_story_id = 101
-    s.band_id = 1
-    s.status = 'unread'
-    s.seq = 1
+    def build_band_story_list_from_master(field_number):
+        ss = []
+        for m in _suite_master[str(field_number)]['1']:
+            s = user_band_story_pb2.UserBandStory()
+            s.user_id = user_id
+            s.band_story_id = m['1']
+            s.band_id = m['2']['2']
+            s.status = 'already_read'
+            s.seq = m['2']['3']
+            ss.append(s)
+        return sorted(ss, key=attrgetter('seq'), reverse=True)
 
-    s = o.user_afterglow_story_list.entries.add()
-    s.user_id = user_id
-    s.band_story_id = 21
-    s.band_id = 2
-    s.status = 'unread'
-    s.seq = 1
+    # s = o.user_poppin_party_story_list.entries.add()
+    # s.user_id = user_id
+    # s.band_story_id = 1
+    # s.band_id = 1
+    # s.status = 'unread'
+    # s.seq = 1
+    # s = o.user_poppin_party_story_list.entries.add()
+    # s.user_id = user_id
+    # s.band_story_id = 101
+    # s.band_id = 1
+    # s.status = 'unread'
+    # s.seq = 1
+    o.user_poppin_party_story_list.entries.extend(
+        build_band_story_list_from_master(22))  # masterPoppinPartyStoryMap
 
-    s = o.user_pastel_palettes_story_list.entries.add()
-    s.user_id = user_id
-    s.band_story_id = 61
-    s.band_id = 4
-    s.status = 'unread'
-    s.seq = 1
+    # s = o.user_afterglow_story_list.entries.add()
+    # s.user_id = user_id
+    # s.band_story_id = 21
+    # s.band_id = 2
+    # s.status = 'unread'
+    # s.seq = 1
+    o.user_afterglow_story_list.entries.extend(
+        build_band_story_list_from_master(23))  # masterAfterglowStoryMap
 
-    s = o.user_hello_happy_world_story_list.entries.add()
-    s.user_id = user_id
-    s.band_story_id = 41
-    s.band_id = 3
-    s.status = 'unread'
-    s.seq = 1
+    # s = o.user_pastel_palettes_story_list.entries.add()
+    # s.user_id = user_id
+    # s.band_story_id = 61
+    # s.band_id = 4
+    # s.status = 'unread'
+    # s.seq = 1
+    o.user_pastel_palettes_story_list.entries.extend(
+        build_band_story_list_from_master(24))  # masterPastelPalettesStoryMap
 
-    s = o.user_roselia_story_list.entries.add()
-    s.user_id = user_id
-    s.band_story_id = 81
-    s.band_id = 5
-    s.status = 'unread'
-    s.seq = 1
+    # s = o.user_hello_happy_world_story_list.entries.add()
+    # s.user_id = user_id
+    # s.band_story_id = 41
+    # s.band_id = 3
+    # s.status = 'unread'
+    # s.seq = 1
+    o.user_hello_happy_world_story_list.entries.extend(
+        build_band_story_list_from_master(25))  # masterHelloHappyWorldStoryMap
+
+    # s = o.user_roselia_story_list.entries.add()
+    # s.user_id = user_id
+    # s.band_story_id = 81
+    # s.band_id = 5
+    # s.status = 'unread'
+    # s.seq = 1
+    o.user_roselia_story_list.entries.extend(
+        build_band_story_list_from_master(26))  # masterRoseliaStoryMap
 
     ls = o.user_commons_live2d_map.entries['event_box_gacha_top_first'].entries
     l = ls.add()
@@ -362,17 +391,26 @@ def suite_user_api(user_id):
         l.live2d_id = i
         l.live2d_category = 'event_box_gacha_after_win'
 
-    for m in suite_master['1']['1']:    # MasterMusicListGetResponse
+    for m in _suite_master['4']['1']:   # masterCharacterSituationMap
+        if '14' not in m['2']:
+            continue
+        for me in m['2']['14']['1']:    # episodes
+            e = o.user_episode_map.entries[me['1']]
+            e.user_id = user_id
+            e.episode_id = me['1']
+            e.episode_status = 'already_read'
+
+    for m in _suite_master['1']['1']:   # MasterMusicListGetResponse
         i = o.user_music_inventory_list.entries.add()
         i.user_id = user_id
         i.music_id = m['1']
         i.seq = 1
         i.has_mv = m['1'] in (
-            v['1'] for v in suite_master['109']['1']
+            v['1'] for v in _suite_master['109']['1']
         )   # MasterMusicVideoListMap
         i.is_favorite = False
 
-    for m in suite_master['31']['1']:   # MasterCostumeMap
+    for m in _suite_master['31']['1']:  # MasterCostumeMap
         c = o.user_costume_map.entries[m['1']]
         c.user_id = user_id
         c.costume_id = m['1']
@@ -425,7 +463,7 @@ def suite_user_api(user_id):
     b.server_date = int(time.time()*1000)
     b.live_boost_bonus_type = 'default'
 
-    for i in [3, 4, 7, 9, 11, 12, 13, 14, 18, 19]:
+    for i in range(1, 20):
         s = o.user_area_status_map.entries[i]
         s.user_id = user_id
         s.area_id = i
@@ -444,7 +482,7 @@ def suite_user_api(user_id):
     b = o.user_home_banner_list.entries.add()
     b.home_banner_id = 1482
 
-    for m in suite_master['46']['1']:   # MasterStampMap
+    for m in _suite_master['46']['1']:  # MasterStampMap
         s = o.user_stamp_map.entries[m['1']]
         s.user_id = user_id
         s.stamp_id = m['1']
@@ -596,16 +634,31 @@ def suite_user_api(user_id):
 
     o.user_season.season_id = 27
 
-    for m in suite_master['68']['1']:   # MasterEventStoryMemorialConfigMap
-        sm = o.user_event_story_memorial_map.entries[m['1']]
-        sm.event_id = m['1']
-        s = sm.user_event_story_list.entries.add()
-        s.user_id = user_id
-        s.event_id = m['1']
-        s.seq = 0
-        s.status = 'unread'
-        sm.is_exist_un_read_story = True
-        sm.is_locked = False
+    # for m in _suite_master['68']['1']:  # MasterEventStoryMemorialConfigMap
+    #     sm = o.user_event_story_memorial_map.entries[m['1']]
+    #     sm.event_id = m['1']
+    #     s = sm.user_event_story_list.entries.add()
+    #     s.user_id = user_id
+    #     s.event_id = m['1']
+    #     s.seq = 0
+    #     s.status = 'unread'
+    #     sm.is_exist_un_read_story = True
+    #     sm.is_locked = False
+    with open('krdori/responses/user_event_story_memorial_response.binpb',
+               'rb') as f:
+        m = (user_event_story_memorial_pb2.UserEventStoryMemorialResponse
+             .FromString(f.read()))
+        for k, v in m.past_event_story_map.entries.items():
+            sm = o.user_event_story_memorial_map.entries[k]
+            sm.event_id = k
+            for e in v.entries:
+                s = sm.user_event_story_list.entries.add()
+                s.user_id = user_id
+                s.event_id = k
+                s.seq = e.seq
+                s.status = 'already_read'
+            sm.is_exist_un_read_story = False
+            sm.is_locked = False
 
     o.user_released_bonds_id_list.entries.extend(range(1, 66))
     o.user_released_bonds_id_list.entries.extend(range(148, 158))
@@ -618,7 +671,7 @@ def suite_user_api(user_id):
     t.quantity = 1
     t.exchange_end_at = (int(time.time())+86400*30) * 1000
 
-    for m in suite_master['30']['1']:   # MasterMusicShopMap
+    for m in _suite_master['30']['1']:  # MasterMusicShopMap
         s = o.user_music_shop_map.entries[m['2']['2']].entries.add()
         s.user_id = user_id
         s.music_shop_id = m['1']
@@ -653,7 +706,7 @@ def suite_user_api(user_id):
     o.user_deco_equipment.user_id = user_id
     o.user_deco_equipment.deco_frame_id = 1
 
-    for m in suite_master['109']['1']:  # MasterMusicVideoListMap
+    for m in _suite_master['109']['1']:     # MasterMusicVideoListMap
         if isinstance(m['2']['1'], list):
             for v in m['2']['1']:
                 i = (o.user_music_video_list_map
@@ -673,19 +726,23 @@ def suite_user_api(user_id):
     o.user_event_box_gacha_spin_settings.lump_spin_flg = False
     o.user_event_box_gacha_spin_settings.auto_stop_flg = False
 
-    s = o.user_morfonica_story_list.entries.add()
-    s.user_id = user_id
-    s.band_story_id = 303
-    s.band_id = 21
-    s.status = 'unread'
-    s.seq = 1
+    # s = o.user_morfonica_story_list.entries.add()
+    # s.user_id = user_id
+    # s.band_story_id = 303
+    # s.band_id = 21
+    # s.status = 'unread'
+    # s.seq = 1
+    o.user_morfonica_story_list.entries.extend(
+        build_band_story_list_from_master(401))     # masterMorfonicaStoryMap
 
-    s = o.user_raise_a_suilen_story_list.entries.add()
-    s.user_id = user_id
-    s.band_story_id = 323
-    s.band_id = 18
-    s.status = 'unread'
-    s.seq = 1
+    # s = o.user_raise_a_suilen_story_list.entries.add()
+    # s.user_id = user_id
+    # s.band_story_id = 323
+    # s.band_id = 18
+    # s.status = 'unread'
+    # s.seq = 1
+    o.user_raise_a_suilen_story_list.entries.extend(
+        build_band_story_list_from_master(402))     # masterRaiseASuilenStoryMap
 
     o.user_comeback_status.comeback_gacha_id = 0
 
@@ -766,6 +823,7 @@ def suite_user_api(user_id):
 
     # with open('suite_user_get_response.txtpb', 'w', encoding='utf-8') as f:
     #     f.write(str(o))
+    _suite_user = o
     return o.SerializeToString()
 
 
@@ -860,6 +918,7 @@ def get_cleanup_info_api():
 def get_user_area_character_api(user_id):
     with open('krdori/responses/user_area.binpb', 'rb') as f:
         o = user_area_pb2.UserArea.FromString(f.read())
+    o.user_season.season_id = 27
     return o.SerializeToString()
 
 
@@ -873,12 +932,148 @@ def suite_login_bonus_api(user_id, login_bonus_id):
     b.server_date = int(time.time()*1000)
     b.live_boost_bonus_type = 'default'
 
+    o.update_resources.user_login_bonus_map.SetInParent()
+
     r = o.accept_response.player_resources.entries.add()
     r.resource_id = 1
     r.resource_type = 'practice_ticket'
     r.quantity = 5
     r.lb_bonus = 1
 
+    return o.SerializeToString()
+
+
+@app.get('/api/user/<int:user_id>/bandstory/<int:band_id>')
+def user_band_story_api(user_id, band_id):
+    o = user_band_story_pb2.UserBandStoryList()
+    if band_id == 1:
+        o.CopyFrom(_suite_user.user_poppin_party_story_list)
+    elif band_id == 2:
+        o.CopyFrom(_suite_user.user_afterglow_story_list)
+    elif band_id == 3:
+        o.CopyFrom(_suite_user.user_hello_happy_world_story_list)
+    elif band_id == 4:
+        o.CopyFrom(_suite_user.user_pastel_palettes_story_list)
+    elif band_id == 5:
+        o.CopyFrom(_suite_user.user_roselia_story_list)
+    elif band_id == 18:
+        o.CopyFrom(_suite_user.user_raise_a_suilen_story_list)
+    elif band_id == 21:
+        o.CopyFrom(_suite_user.user_morfonica_story_list)
+    return o.SerializeToString()
+
+
+# @app.post('/api/suite/user/<int:user_id>/bandstory/<int:band_id>
+#           '/id/<int:band_story_id>')
+# def post_suite_user_band_story_api(user_id, band_id, band_story_id):
+#     o = suite_user_story_pb2.SuiteUserBandStoryResponse()
+#     o.SerializeToString()
+
+
+@app.post('/api/user/<int:user_id>/logging/playstory')
+def post_logging_play_story_api(user_id):
+    return b''
+
+
+@app.post('/api/user/<int:user_id>/musicvideo/watching/<int:music_id>'
+          '/<int:seq>')
+def post_music_video_watching_api(user_id, music_id, seq):
+    return b''
+
+
+@app.get('/api/user/<int:user_id>/actionset/album/<int:character_id>')
+def get_user_action_set_album_api(user_id, character_id):
+    o = user_action_set_album_pb2.UserActionSetAlbumMap()
+
+    with open('krdori/responses/jp/7.0.0.110/master_action_set_map.json',
+              'rb') as f:
+        amap = json.loads(f.read())
+
+    for m in _suite_master['14']['1']:  # MasterActionSetMap
+        if m['1'] >= 90000:
+            continue
+        if (isinstance(m['2']['3'], list) and character_id in m['2']['3']
+                or character_id == m['2']['3']):
+            a = o.entries[m['1']]
+            a.action_set_id = m['1']
+            a.balloon_text = m['2']['11']
+            a.is_memorial = (amap[str(m['1'])]['startSeason'] == 'season_1'
+                             and 'endSeason' in amap[str(m['1'])])
+
+    return o.SerializeToString()
+
+
+@app.get('/api/user/<int:user_id>/backstagetalkset/readhistory')
+def get_user_backstage_talk_set_read_history_map_api(user_id):
+    o = user_backstage_talk_set_pb2.UserBackstageTalkSetReadHistoryMap()
+
+    for m in _suite_master['96']['1']:  # MasterBackstageTalkSetMap
+        o.entries[m['1']] = 'already_read'
+
+    return o.SerializeToString()
+
+
+@app.get('/api/user/<int:user_id>/memorialstory')
+def get_user_memorial_story_api(user_id):
+    with open('krdori/responses/user_event_story_memorial_response.binpb',
+               'rb') as f:
+        o = (user_event_story_memorial_pb2.UserEventStoryMemorialResponse
+             .FromString(f.read()))
+
+    o.ClearField('user_event_story_memorial_map')
+    for k, v in o.past_event_story_map.entries.items():
+        m = o.user_event_story_memorial_map.entries[k]
+        m.event_id = k
+        for e in v.entries:
+            s = m.user_event_story_list.entries.add()
+            s.user_id = user_id
+            s.event_id = k
+            s.seq = e.seq
+            s.status = 'already_read'
+        m.is_exist_un_read_story = False
+        m.is_locked = False
+
+    return o.SerializeToString()
+
+
+@app.post('/api/suite/user/<int:user_id>/memorialstory/<int:event_id>'
+          '/<int:seq>')
+def post_user_memorial_story_api(user_id, event_id, seq):
+    o = suite_user_event_story_memorial_pb2.SuiteReadStoryResponse()
+
+    o.update_resources.user_event_story_memorial_map.CopyFrom(
+        _suite_user.user_event_story_memorial_map)
+
+    r = o.user_story_event_read_story_response
+    s = r.read_user_event_story
+    s.user_id = user_id
+    s.event_id = event_id
+    s.seq = seq
+    s.status = 'already_read'
+
+    r.rewards.SetInParent()
+    r.newly_opened_contents.SetInParent()
+
+    return o.SerializeToString()
+
+
+@app.put('/api/suite/user/<int:user_id>/character/<int:character_id>'
+            '/costume/<int:costume_id>')
+def put_user_character_api(user_id, character_id, costume_id):
+    o = suite_user_character_pb2.SuiteUserCharacter()
+
+    c = o.user_character
+    c.user_id = user_id
+    c.character_id = character_id
+    c.costume_id = costume_id
+
+    return o.SerializeToString()
+
+
+@app.delete('/api/suite/user/<int:user_id>/character/<int:character_id>'
+            '/costume')
+def delete_user_character_api(user_id, character_id):
+    o = suite_user_character_pb2.SuiteUserCharacter()
     return o.SerializeToString()
 
 

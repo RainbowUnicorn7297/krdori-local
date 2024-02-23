@@ -1,0 +1,24 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message MasterEvent {
+  uint32 event_id = 1;
+  string event_type = 2;
+  string event_name = 3;
+  string asset_bundle_name = 4;
+  uint64 start_at = 5;
+  uint64 end_at = 6;
+  bool enable_flg = 7;
+  uint64 public_start_at = 8;
+  uint64 public_end_at = 9;
+  uint64 distribution_start_at = 10;
+  uint64 distribution_end_at = 11;
+  string bgm_asset_bundle_name = 12;
+  string bgm_file_name = 13;
+  uint64 aggregate_end_at = 14;
+  uint64 event_exchanges_end_at = 15;
+  // uint64 reception_end_at = 16;
+  // uint32 previous_event_id = 17;
+  // repeated krdori.pb2.ce.MasterEventPointReward point_rewards = 18;
+  // repeated krdori.pb2.ce.MasterEventRankingReward ranking_rewards = 19;
+}

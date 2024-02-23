@@ -1,0 +1,10 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+import "krdori/pb2/ce/suite_user.proto";
+import "krdori/pb2/ce/user_story_event.proto";
+
+message SuiteReadStoryResponse {
+  krdori.pb2.ce.SuiteUserGetResponse update_resources = 1;
+  krdori.pb2.ce.UserStoryEventReadStoryResponse user_story_event_read_story_response = 2;
+}

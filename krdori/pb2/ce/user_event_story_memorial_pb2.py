@@ -12,9 +12,12 @@ _sym_db = _symbol_database.Default()
 
 
 from krdori.pb2.ce import user_event_story_pb2 as krdori_dot_pb2_dot_ce_dot_user__event__story__pb2
+from krdori.pb2.ce import master_event_pb2 as krdori_dot_pb2_dot_ce_dot_master__event__pb2
+from krdori.pb2.ce import master_event_story_pb2 as krdori_dot_pb2_dot_ce_dot_master__event__story__pb2
+from krdori.pb2.ce import master_event_character_pb2 as krdori_dot_pb2_dot_ce_dot_master__event__character__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n-krdori/pb2/ce/user_event_story_memorial.proto\x12\rkrdori.pb2.ce\x1a$krdori/pb2/ce/user_event_story.proto\"\x9f\x01\n\x16UserEventStoryMemorial\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\r\x12@\n\x15user_event_story_list\x18\x02 \x01(\x0b\x32!.krdori.pb2.ce.UserEventStoryList\x12\x1e\n\x16is_exist_un_read_story\x18\x03 \x01(\x08\x12\x11\n\tis_locked\x18\x04 \x01(\x08\"\xba\x01\n\x19UserEventStoryMemorialMap\x12\x46\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x35.krdori.pb2.ce.UserEventStoryMemorialMap.EntriesEntry\x1aU\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12\x34\n\x05value\x18\x02 \x01(\x0b\x32%.krdori.pb2.ce.UserEventStoryMemorial:\x02\x38\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n-krdori/pb2/ce/user_event_story_memorial.proto\x12\rkrdori.pb2.ce\x1a$krdori/pb2/ce/user_event_story.proto\x1a krdori/pb2/ce/master_event.proto\x1a&krdori/pb2/ce/master_event_story.proto\x1a*krdori/pb2/ce/master_event_character.proto\"\x9f\x01\n\x16UserEventStoryMemorial\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\r\x12@\n\x15user_event_story_list\x18\x02 \x01(\x0b\x32!.krdori.pb2.ce.UserEventStoryList\x12\x1e\n\x16is_exist_un_read_story\x18\x03 \x01(\x08\x12\x11\n\tis_locked\x18\x04 \x01(\x08\"\xba\x01\n\x19UserEventStoryMemorialMap\x12\x46\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x35.krdori.pb2.ce.UserEventStoryMemorialMap.EntriesEntry\x1aU\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12\x34\n\x05value\x18\x02 \x01(\x0b\x32%.krdori.pb2.ce.UserEventStoryMemorial:\x02\x38\x01\"\x95\x01\n\x0cPastEventMap\x12\x39\n\x07\x65ntries\x18\x01 \x03(\x0b\x32(.krdori.pb2.ce.PastEventMap.EntriesEntry\x1aJ\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.krdori.pb2.ce.MasterEvent:\x02\x38\x01\"\xa8\x01\n\x11PastEvenStorytMap\x12>\n\x07\x65ntries\x18\x01 \x03(\x0b\x32-.krdori.pb2.ce.PastEvenStorytMap.EntriesEntry\x1aS\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12\x32\n\x05value\x18\x02 \x01(\x0b\x32#.krdori.pb2.ce.MasterEventStoryList:\x02\x38\x01\"\xb9\x02\n\x1eUserEventStoryMemorialResponse\x12O\n\x1duser_event_story_memorial_map\x18\x01 \x01(\x0b\x32(.krdori.pb2.ce.UserEventStoryMemorialMap\x12\x33\n\x0epast_event_map\x18\x02 \x01(\x0b\x32\x1b.krdori.pb2.ce.PastEventMap\x12>\n\x14past_event_story_map\x18\x03 \x01(\x0b\x32 .krdori.pb2.ce.PastEvenStorytMap\x12Q\n\x1dpast_event_character_list_map\x18\x04 \x01(\x0b\x32*.krdori.pb2.ce.MasterEventCharacterListMapb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -23,10 +26,24 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _USEREVENTSTORYMEMORIALMAP_ENTRIESENTRY._options = None
   _USEREVENTSTORYMEMORIALMAP_ENTRIESENTRY._serialized_options = b'8\001'
-  _globals['_USEREVENTSTORYMEMORIAL']._serialized_start=103
-  _globals['_USEREVENTSTORYMEMORIAL']._serialized_end=262
-  _globals['_USEREVENTSTORYMEMORIALMAP']._serialized_start=265
-  _globals['_USEREVENTSTORYMEMORIALMAP']._serialized_end=451
-  _globals['_USEREVENTSTORYMEMORIALMAP_ENTRIESENTRY']._serialized_start=366
-  _globals['_USEREVENTSTORYMEMORIALMAP_ENTRIESENTRY']._serialized_end=451
+  _PASTEVENTMAP_ENTRIESENTRY._options = None
+  _PASTEVENTMAP_ENTRIESENTRY._serialized_options = b'8\001'
+  _PASTEVENSTORYTMAP_ENTRIESENTRY._options = None
+  _PASTEVENSTORYTMAP_ENTRIESENTRY._serialized_options = b'8\001'
+  _globals['_USEREVENTSTORYMEMORIAL']._serialized_start=221
+  _globals['_USEREVENTSTORYMEMORIAL']._serialized_end=380
+  _globals['_USEREVENTSTORYMEMORIALMAP']._serialized_start=383
+  _globals['_USEREVENTSTORYMEMORIALMAP']._serialized_end=569
+  _globals['_USEREVENTSTORYMEMORIALMAP_ENTRIESENTRY']._serialized_start=484
+  _globals['_USEREVENTSTORYMEMORIALMAP_ENTRIESENTRY']._serialized_end=569
+  _globals['_PASTEVENTMAP']._serialized_start=572
+  _globals['_PASTEVENTMAP']._serialized_end=721
+  _globals['_PASTEVENTMAP_ENTRIESENTRY']._serialized_start=647
+  _globals['_PASTEVENTMAP_ENTRIESENTRY']._serialized_end=721
+  _globals['_PASTEVENSTORYTMAP']._serialized_start=724
+  _globals['_PASTEVENSTORYTMAP']._serialized_end=892
+  _globals['_PASTEVENSTORYTMAP_ENTRIESENTRY']._serialized_start=809
+  _globals['_PASTEVENSTORYTMAP_ENTRIESENTRY']._serialized_end=892
+  _globals['_USEREVENTSTORYMEMORIALRESPONSE']._serialized_start=895
+  _globals['_USEREVENTSTORYMEMORIALRESPONSE']._serialized_end=1208
 # @@protoc_insertion_point(module_scope)

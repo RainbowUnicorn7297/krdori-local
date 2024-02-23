@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n krdori/pb2/ce/user_episode.proto\x12\rkrdori.pb2.ce\"J\n\x0bUserEpisode\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x12\n\nepisode_id\x18\x02 \x01(\r\x12\x16\n\x0e\x65pisode_status\x18\x03 \x01(\t\"\x99\x01\n\x0eUserEpisodeMap\x12;\n\x07\x65ntries\x18\x01 \x03(\x0b\x32*.krdori.pb2.ce.UserEpisodeMap.EntriesEntry\x1aJ\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.krdori.pb2.ce.UserEpisode:\x02\x38\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n krdori/pb2/ce/user_episode.proto\x12\rkrdori.pb2.ce\"J\n\x0bUserEpisode\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x12\n\nepisode_id\x18\x02 \x01(\r\x12\x16\n\x0e\x65pisode_status\x18\x03 \x01(\t\"\x99\x01\n\x0eUserEpisodeMap\x12;\n\x07\x65ntries\x18\x01 \x03(\x0b\x32*.krdori.pb2.ce.UserEpisodeMap.EntriesEntry\x1aJ\n\x0c\x45ntriesEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.krdori.pb2.ce.UserEpisode:\x02\x38\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)

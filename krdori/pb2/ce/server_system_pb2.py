@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!krdori/pb2/ce/server_system.proto\x12\rkrdori.pb2.ce\"A\n\x0cServerSystem\x12\x13\n\x0bserver_date\x18\x01 \x01(\x04\x12\x1c\n\x14time_zone_raw_offset\x18\x02 \x01(\x11\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!krdori/pb2/ce/server_system.proto\x12\rkrdori.pb2.ce\"A\n\x0cServerSystem\x12\x13\n\x0bserver_date\x18\x01 \x01(\x04\x12\x1c\n\x14time_zone_raw_offset\x18\x02 \x01(\x05\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)

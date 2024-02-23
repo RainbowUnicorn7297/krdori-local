@@ -1,0 +1,12 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message UserActionSetAlbum {
+  uint32 action_set_id = 1;
+  string balloon_text = 2;
+  bool is_memorial = 3;
+}
+
+message UserActionSetAlbumMap {
+  map<uint32, krdori.pb2.ce.UserActionSetAlbum> entries = 1;
+}

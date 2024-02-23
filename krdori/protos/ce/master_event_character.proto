@@ -1,0 +1,17 @@
+syntax = "proto3";
+package krdori.pb2.ce;
+
+message MasterEventCharacter {
+  uint32 event_id = 1;
+  uint32 character_id = 2;
+  float percent = 3;
+  uint32 seq = 4;
+}
+
+message MasterEventCharacterList {
+  repeated krdori.pb2.ce.MasterEventCharacter entries = 1;
+}
+
+message MasterEventCharacterListMap {
+  map<uint32, krdori.pb2.ce.MasterEventCharacterList> entries = 1;
+}
