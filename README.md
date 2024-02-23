@@ -26,6 +26,8 @@ python main.py &
 ```
 The game should be playable by now.
 
+On newer versions of Android, clicking on the "Log in with Kakao Account" button launches a browser that shows an `about:blank` page without redirecting back to the game. You can visit the link `http://127.0.0.1:8480/oauth/authorize` using another browser to bypass this.
+
 ## Required Python Packages
 - websockets
 - protobuf
