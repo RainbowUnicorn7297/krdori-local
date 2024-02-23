@@ -9,12 +9,16 @@ from Crypto.Util.Padding import pad
 from flask import Flask, Request, request, Response
 
 from krdori.pb2.ce import (
-    app_pb2, server_system_pb2, suite_user_character_pb2, suite_user_event_story_memorial_pb2, suite_user_login_bonus_pb2, suite_user_pb2, user_action_set_album_pb2, user_area_pb2, user_auth_pb2, user_backstage_talk_set_pb2, user_band_story_pb2, user_event_story_memorial_pb2, user_pb2, user_story_pb2
+    app_pb2, server_system_pb2, suite_user_character_pb2,
+    suite_user_event_story_memorial_pb2, suite_user_login_bonus_pb2,
+    suite_user_pb2, user_action_set_album_pb2, user_area_pb2, user_auth_pb2,
+    user_backstage_talk_set_pb2, user_band_story_pb2,
+    user_event_story_memorial_pb2, user_pb2, user_story_pb2
 )
 # from krdori.pb2.ce import suite_user_story_pb2
 
 # Port used by the game server
-_port = 5000
+_port = 8482
 
 app = Flask(__name__)
 
@@ -85,8 +89,8 @@ def post_user_api():
 @app.put('/api/user/<int:user_id>/auth/prepare')
 def prepare_user_auth_api(user_id):
     o = user_auth_pb2.UserAuthPrepareResponse()
-    o.api_key = 'AIzaSyCUctXVeG4V5kfaf0B9vK0ydbMII14WdjM'
-    o.nonce = 'alHwrthGbEYvqaJ+iyhFfxXUqPblewcyvFHrmTOEp47mTAFznu0xlIOUZiP4iwFz'
+    o.api_key = 'A'*39
+    o.nonce = 'A'*64
     o.need_check = True
     return o.SerializeToString()
 
@@ -245,54 +249,18 @@ def suite_user_api(user_id):
             ss.append(s)
         return sorted(ss, key=attrgetter('seq'), reverse=True)
 
-    # s = o.user_poppin_party_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 1
-    # s.band_id = 1
-    # s.status = 'unread'
-    # s.seq = 1
-    # s = o.user_poppin_party_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 101
-    # s.band_id = 1
-    # s.status = 'unread'
-    # s.seq = 1
     o.user_poppin_party_story_list.entries.extend(
         build_band_story_list_from_master(22))  # masterPoppinPartyStoryMap
 
-    # s = o.user_afterglow_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 21
-    # s.band_id = 2
-    # s.status = 'unread'
-    # s.seq = 1
     o.user_afterglow_story_list.entries.extend(
         build_band_story_list_from_master(23))  # masterAfterglowStoryMap
 
-    # s = o.user_pastel_palettes_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 61
-    # s.band_id = 4
-    # s.status = 'unread'
-    # s.seq = 1
     o.user_pastel_palettes_story_list.entries.extend(
         build_band_story_list_from_master(24))  # masterPastelPalettesStoryMap
 
-    # s = o.user_hello_happy_world_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 41
-    # s.band_id = 3
-    # s.status = 'unread'
-    # s.seq = 1
     o.user_hello_happy_world_story_list.entries.extend(
         build_band_story_list_from_master(25))  # masterHelloHappyWorldStoryMap
 
-    # s = o.user_roselia_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 81
-    # s.band_id = 5
-    # s.status = 'unread'
-    # s.seq = 1
     o.user_roselia_story_list.entries.extend(
         build_band_story_list_from_master(26))  # masterRoseliaStoryMap
 
@@ -636,16 +604,6 @@ def suite_user_api(user_id):
 
     o.user_season.season_id = 27
 
-    # for m in _suite_master['68']['1']:  # MasterEventStoryMemorialConfigMap
-    #     sm = o.user_event_story_memorial_map.entries[m['1']]
-    #     sm.event_id = m['1']
-    #     s = sm.user_event_story_list.entries.add()
-    #     s.user_id = user_id
-    #     s.event_id = m['1']
-    #     s.seq = 0
-    #     s.status = 'unread'
-    #     sm.is_exist_un_read_story = True
-    #     sm.is_locked = False
     with open('krdori/responses/user_event_story_memorial_response.binpb',
                'rb') as f:
         m = (user_event_story_memorial_pb2.UserEventStoryMemorialResponse
@@ -683,7 +641,9 @@ def suite_user_api(user_id):
         s.status = 'sold_out'
         s.seq = m['2']['4']
 
-    # TODO: user_backstage_talk_set_read_history_map
+    for m in _suite_master['96']['1']:  # MasterBackstageTalkSetMap
+        o.user_backstage_talk_set_read_history_map.entries[m['1']] = (
+            'already_read')
 
     o.user_friend_relation_detail.application_limit = 50
     o.user_friend_relation_detail.approval_limit = 50
@@ -728,21 +688,9 @@ def suite_user_api(user_id):
     o.user_event_box_gacha_spin_settings.lump_spin_flg = False
     o.user_event_box_gacha_spin_settings.auto_stop_flg = False
 
-    # s = o.user_morfonica_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 303
-    # s.band_id = 21
-    # s.status = 'unread'
-    # s.seq = 1
     o.user_morfonica_story_list.entries.extend(
         build_band_story_list_from_master(401))     # masterMorfonicaStoryMap
 
-    # s = o.user_raise_a_suilen_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 323
-    # s.band_id = 18
-    # s.status = 'unread'
-    # s.seq = 1
     o.user_raise_a_suilen_story_list.entries.extend(
         build_band_story_list_from_master(402))     # masterRaiseASuilenStoryMap
 
@@ -833,56 +781,6 @@ def suite_user_api(user_id):
 def suite_login_bonus_accept_all_api(user_id):
     o = suite_user_login_bonus_pb2.SuiteUserLoginBonusAcceptAllResponse()
     u = o.update_resources
-
-    # s = u.user_main_story_list.entries.add()
-    # s.user_id = user_id
-    # s.story_id = 1
-    # s.status = 'unread'
-    # s = u.user_main_story_list.entries.add()
-    # s.user_id = user_id
-    # s.story_id = 26
-    # s.status = 'unread'
-
-    # s = u.user_poppin_party_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 1
-    # s.band_id = 1
-    # s.status = 'unread'
-    # s.seq = 1
-    # s = u.user_poppin_party_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 101
-    # s.band_id = 1
-    # s.status = 'unread'
-    # s.seq = 1
-
-    # s = u.user_afterglow_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 21
-    # s.band_id = 2
-    # s.status = 'unread'
-    # s.seq = 1
-
-    # s = u.user_pastel_palettes_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 61
-    # s.band_id = 4
-    # s.status = 'unread'
-    # s.seq = 1
-
-    # s = u.user_hello_happy_world_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 41
-    # s.band_id = 3
-    # s.status = 'unread'
-    # s.seq = 1
-
-    # s = u.user_roselia_story_list.entries.add()
-    # s.user_id = user_id
-    # s.band_story_id = 81
-    # s.band_id = 5
-    # s.status = 'unread'
-    # s.seq = 1
 
     u.user_resource_count.present = 1
 
@@ -1008,10 +906,8 @@ def get_user_action_set_album_api(user_id, character_id):
 @app.get('/api/user/<int:user_id>/backstagetalkset/readhistory')
 def get_user_backstage_talk_set_read_history_map_api(user_id):
     o = user_backstage_talk_set_pb2.UserBackstageTalkSetReadHistoryMap()
-
     for m in _suite_master['96']['1']:  # MasterBackstageTalkSetMap
         o.entries[m['1']] = 'already_read'
-
     return o.SerializeToString()
 
 

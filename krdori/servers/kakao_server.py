@@ -4,13 +4,11 @@ import base64
 import hashlib
 import hmac
 import json
-import re
 import time
-import zlib
 from wsgiref.simple_server import make_server
 
 # Port used by the Kakao SDK server
-_port = 8080
+_port = 8480
 
 _request_country = 'kr'
 
@@ -62,7 +60,7 @@ def application(environ, start_response):
                         'url_setting_dialog_help': 'https://kakaogames.oqupie.com/portals/1697/articles/35835',
                         'kakaogameCommunityUrl': 'https://playgame.kakao.com/bangdream',
                         # 'gameServerAddr': 'http://live.bdk.kakaogames.com:50051/api/',
-                        'gameServerAddr': 'http://192.168.0.50:5000/api/',
+                        'gameServerAddr': 'http://127.0.0.1:8482/api/',
                         'modTime': 1514876083602,
                         'daumCafeUrl': 'http://cafe.daum.net/bangdream',
                         'photonId': 'abb90c74-f36d-441b-bf5d-241315ea5f06',
@@ -129,20 +127,15 @@ def application(environ, start_response):
         sig = base64.b64encode(sig).decode('ascii')
         headers.append(('sig', f'0;{sig}'))
     elif 'oauth/authorize' in path_info:
-        # query_string = environ['QUERY_STRING']
-        # redirect_uri = re.search('redirect_uri=(.*%3A%2F%2Foauth)', query_string).group(1)
-        # redirect_uri = redirect_uri.replace('%3A%2F%2F', '://') + '?code=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-        # print(redirect_uri)
         status = '302 Found'
-        # headers = [('Location', redirect_uri)]
-        headers = [('Location', 'kakao00000000000000000000000000000000://oauth?code=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')]
+        headers = [('Location', f'kakao{"0"*32}://oauth?code={"A"*86}')]
         response = ''
     elif 'oauth/token' in path_info:
         response = json.dumps(
             {
-                'access_token': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+                'access_token': 'A'*62,
                 'token_type': 'bearer',
-                'refresh_token': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+                'refresh_token': 'A'*62,
                 'expires_in': 43199,
                 'scope': 'profile',
                 'refresh_token_expires_in': 5183999
@@ -156,7 +149,7 @@ def application(environ, start_response):
                 'connected_at': '2000-01-01T00:00:00Z',
                 'has_signed_up': True,
                 'for_partner': {
-                    'uuid': 'AAAAAAAAAAAAAAAAAAAAAAAAAAA',
+                    'uuid': 'A'*27,
                     'remaining_invite_count': 30,
                     'remaining_group_msg_count': 10
                 },
@@ -190,7 +183,6 @@ def application(environ, start_response):
     elif 'service/v3/agreement/getForLogin' in path_info:
         request_len = int(environ['CONTENT_LENGTH'])
         request = json.loads(environ['wsgi.input'].read(request_len))
-        print(request)
         response = json.dumps(
             {
                 'country': request['country'],
@@ -239,40 +231,6 @@ def application(environ, start_response):
             },
             separators=(',', ':')
         )
-    elif '/session' in path_info:
-        # print('\n'.join([str((f'{key}: {value}').encode('utf-8'))
-        #                  for key, value in environ.items()]))
-        query_string = environ['QUERY_STRING']
-        prereq = re.search('prereq=(.*)', query_string).group(1)
-        prereq = base64.urlsafe_b64decode(prereq)
-        prereq = zlib.decompress(prereq)
-        prereq = json.loads(prereq)
-        print(f'{prereq=}')
-        response = json.dumps(
-            [
-                prereq[0],
-                prereq[1],
-                {
-                    'status': 200,
-                    'desc': 'OK',
-                    'content': {}
-                }
-            ],
-            separators=(',', ':')
-        ).encode('utf-8')
-        response = zlib.compress(response)
-
-        sec_websocket_key = environ['HTTP_SEC_WEBSOCKET_KEY']
-        session_accept_magic = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11'
-        accept = (sec_websocket_key + session_accept_magic).encode('ascii')
-        accept = hashlib.sha1(accept).digest()
-        accept = base64.b64encode(accept)
-        headers = [
-            ('Content-Type', 'application/octet-stream'),
-            ('Connection', 'Upgrade'),
-            ('Upgrade', 'websocket'),
-            ('Sec-WebSocket-Accept', str(accept))
-        ]
     elif '/service/v3/log/writeSdkBasicLog' in path_info:
         request_len = int(environ['CONTENT_LENGTH'])
         print(environ['wsgi.input'].read(request_len))

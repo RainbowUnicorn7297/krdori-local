@@ -21,7 +21,7 @@ Changing the URI schemes to their corresponding insecure variants (e.g. https to
 - smali_classes2/com/kakao/sdk/auth/network/ApiFactoryKt$kapiWithOAuth$2.smali
 - smali_classes2/com/kakao/sdk/auth/network/ApiFactoryKt$kauth$2.smali
 
-It is unclear whether wss can be changed to ws for session server at the moment.
+If the URI scheme for session server is changed from wss to ws, the default port number now becomes 80 (`0x50` in hex). Changing the session server port number now requires changing this value in smali_classes3/com/kakaogame/session/websocket/WebSocketClient.smali.
 
 ### Changing the Kakao custom scheme
 When the APK requests an oauth token from the servers, it opens a browser that redirects to a URI in this format:
