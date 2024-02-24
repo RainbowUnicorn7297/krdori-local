@@ -17,9 +17,6 @@ from krdori.pb2.ce import (
 )
 # from krdori.pb2.ce import suite_user_story_pb2
 
-# Port used by the game server
-_port = 8482
-
 app = Flask(__name__)
 
 _suite_master = None
@@ -986,6 +983,7 @@ def delete_user_character_api(user_id, character_id):
 #     return o.SerializeToString()
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=_port, debug=False)
+def start(port):
+    print(f'Running game server on port {port}...')
+    app.run(host='0.0.0.0', port=port, debug=False)
 

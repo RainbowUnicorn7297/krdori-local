@@ -10,9 +10,6 @@ import zlib
 
 from websockets.server import serve
 
-# Port used by the session server
-_port = 8481
-
 logging.basicConfig(format='%(message)s', level=logging.DEBUG)
 
 
@@ -55,13 +52,6 @@ async def handler(websocket):
 
 async def main(port):
     async with serve(handler, '', port):
-        print(f'Serving WS on port {port}...')
+        print(f'Running session server on port {port}...')
         await asyncio.Future()  # run forever
-
-
-if __name__ == '__main__':
-    try:
-        asyncio.run(main(_port))
-    except KeyboardInterrupt:
-        pass
 

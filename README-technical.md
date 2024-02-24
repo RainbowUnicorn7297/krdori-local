@@ -14,7 +14,7 @@ Relevant server hostnames can be found in these files:
 
 Other server URIs (e.g. cdn, game) are provided by [the infodesk response to /v2/app](krdori/servers/kakao_server.py). 
 
-All of these hostnames can be changed into IP addresses. Ports can be added at the end of these hostnames. To change the port for session server, the default port number 443 (`0x1bb` in hex) needs be changed inside smali_classes3/com/kakaogame/session/websocket/WebSocketClient.smali as well.
+All of these hostnames can be changed into IP addresses. Ports can be added at the end of these hostnames. For kapi and kauth, change both occurrences of `->authority(` to `->encodedAuthority(` in smali_classes2/com/kakao/sdk/auth/UriUtility.smali so that the `:` between hostname and port is not converted into `%3a`. For session server, the default port number 443 (`0x1bb` in hex) needs be changed inside smali_classes3/com/kakaogame/session/websocket/WebSocketClient.smali as well.
 
 Changing the URI schemes to their corresponding insecure variants (e.g. https to http) can be done directly for URIs that are specified in full. For kapi and kauth, change `"https"` to `"http"` in these files:
 - smali_classes2/com/kakao/sdk/auth/UriUtility.smali (two occurrences of `"https"`)

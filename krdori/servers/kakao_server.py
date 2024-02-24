@@ -7,9 +7,6 @@ import json
 import time
 from wsgiref.simple_server import make_server
 
-# Port used by the Kakao SDK server
-_port = 8480
-
 _request_country = 'kr'
 
 
@@ -127,9 +124,10 @@ def application(environ, start_response):
         sig = base64.b64encode(sig).decode('ascii')
         headers.append(('sig', f'0;{sig}'))
     elif 'oauth/authorize' in path_info:
-        status = '302 Found'
-        headers = [('Location', f'kakao{"0"*32}://oauth?code={"A"*86}')]
-        response = ''
+        status = '200 OK'
+        headers = [('Content-Type', 'text/html')]
+        response = (f'<a href="kakao{"0"*32}://oauth?code={"A"*86}" '
+                    'style="font-size: 100px">Continue</a>')
     elif 'oauth/token' in path_info:
         response = json.dumps(
             {
@@ -241,7 +239,8 @@ def application(environ, start_response):
         headers = [('Content-Type', 'text/html')]
         response = '503 Service Unavailable'
 
-    headers.append(('Content-Length', str(len(response))))
+    if len(response):
+        headers.append(('Content-Length', str(len(response))))
     start_response(status, headers)
     if isinstance(response, bytes):
         return [response]
@@ -251,10 +250,6 @@ def application(environ, start_response):
 
 def start(port):
     with make_server('', port, application) as httpd:
-        print(f'Serving HTTP on port {port}...')
+        print(f'Running Kakao SDK server on port {port}...')
         httpd.serve_forever()
-
-
-if __name__ == '__main__':
-    start(_port)
 
