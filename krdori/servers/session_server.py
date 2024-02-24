@@ -42,9 +42,12 @@ async def handler(websocket):
     await websocket.send(f'["{requestUri}",{header},{body}]')
     async for message in websocket:
         print(message)
-        # request = json.loads(message)
-        # requestUri = request[0]
-        await websocket.send(message)
+        request = json.loads(message)
+        requestUri = request[0]
+        if requestUri == 'presence://v2/player/heartbeat':
+            await websocket.send(None)
+        else:
+            await websocket.send(message)
 
 
 async def main(port):
