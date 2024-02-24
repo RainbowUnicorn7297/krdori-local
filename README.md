@@ -8,7 +8,7 @@ Technical details can be found [here](README-technical.md).
 2. Download and install [Termux](https://f-droid.org/repo/com.termux_118.apk) on your Android device.
 3. Open Termux and run these commands to download and run [krdori.sh](krdori.sh):
 ```
-curl https://bit.ly/krdori-setup -o krdori.sh
+curl https://bit.ly/krdori-setup -o krdori.sh -L
 chmod +x krdori.sh
 ./krdori.sh
 ```
